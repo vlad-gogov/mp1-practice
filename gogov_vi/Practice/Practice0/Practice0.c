@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <locale.h>
-
-void main()
+ void main()
 {
     double x1, y1, r1, r2, x2, y2, d;
     setlocale(LC_ALL, "Russian");
@@ -20,7 +19,7 @@ void main()
     scanf("%lf", &y2);
     printf("r=");
     scanf("%lf", &r2);
-    d = sqrt(((x1 - x2)*(x1 - x2)) + ((y1 - y2)*(y1 - y2)));
+    d = sqrt(((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2)));
     printf("Расстояние между центрами окружности = %.4lf \n", d);
     printf("Взаимное расположение двух окружностей: \n");
     if ((x1 == x2) && (y1 == y2) && (r1 == r2) && (d == 0))
@@ -43,7 +42,7 @@ void main()
         printf("Окружности имеют 1 общую точку (внутреннее касание) \n");
         return;
     }
-    if ((d + r1 <r2) || (d + r2<r1))
+    if ((d + r1 < r2) || (d + r2 < r1))
     {
         printf("Одна окружность внутри другой окружности");
     }
