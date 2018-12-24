@@ -28,13 +28,15 @@ void pmenu()
 
 int searchcod(int cod)
 {
-    int i = -1;
-    for (i = 0; i < MAX; i++) {
-        if (cod == barcodes[i])
-            break;
+    int i = -1, j;
+    for (j = 0; j < MAX; j++) 
+	{
+		if (cod == barcodes[j])
+		{
+			i = j;
+			break;
+		}
     }
-	if (i >= MAX)
-		i = -1;
     return i;
 }
 
