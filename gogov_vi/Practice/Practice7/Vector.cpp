@@ -243,7 +243,7 @@ double Vector::operator*=(const Vector & x)
     return result;
 }
 
-Vector& Vector::operator=(Vector & x)
+const Vector& Vector::operator=(const Vector & x)
 {
     if ((size == x.size) && (elements == x.elements))
         return *this;

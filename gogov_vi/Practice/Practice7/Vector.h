@@ -16,7 +16,7 @@ struct Vector
     Vector(int _size, double* array);
     double Len();
     Vector& operator+(const Vector & x);
-    Vector& operator=(Vector & x);
+    const Vector& operator=(const Vector & x);
     Vector& operator-(const Vector & x);
     double operator*(const Vector & x);
     Vector& operator+(double a);
