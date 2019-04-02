@@ -1,11 +1,11 @@
 ﻿#include "Vector.h"
 #include <iostream>
-#include <locale>
+#include <clocale>
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
     int size;
+	setlocale(LC_ALL, "Russian");
     std::cout << "Введите размерность первого вектора: ";
     std::cin >> size;
     Vector c;
@@ -26,9 +26,9 @@ int main()
         c = a * (-1);
         std::cout << c;
     }
-    catch (Sizes)
+    catch (DifferentSizes)
     {
-        std::cout << "Размеры не совпадают.\n";
+        std::cout << "Ошибка размерности.\n";
     }
 
     std::cout << "Сумма с 1 (a + 1) : ";
@@ -37,9 +37,9 @@ int main()
         c = a + 1;
         std::cout << c;
     }
-    catch (Sizes)
+    catch (DifferentSizes)
     {
-        std::cout << "Размеры не совпадают.\n";
+        std::cout << "Ошибка размерности.\n";
     }
 
     std::cout << "Разность с 1 (a - 1) : ";
@@ -48,9 +48,9 @@ int main()
         c = a - 1;
         std::cout << c;
     }
-    catch (Sizes)
+    catch (DifferentSizes)
     {
-        std::cout << "Размеры не совпадают.\n";
+        std::cout << "Ошибка размерности.\n";
     }
 
     std::cout << "Сумма (a + b) : ";
@@ -61,7 +61,7 @@ int main()
     }
     catch (DifferentSizes)
     {
-        std::cout << "Размеры не совпадают.\n";
+        std::cout << "Ошибка размерности.\n";
     }
 
     std::cout << "Разность (a - b) : ";
@@ -72,7 +72,7 @@ int main()
     }
     catch (DifferentSizes)
     {
-        std::cout << "Размеры не совпадают.\n";
+        std::cout << "Ошибка размерности.\n";
     }
 
     std::cout << "Скалярное произведение (a * b) : ";
@@ -84,7 +84,7 @@ int main()
     }
     catch (DifferentSizes)
     {
-        std::cout << "Размеры не совпадают.\n";
+        std::cout << "Ошибка размерности.\n";
     }
 
     std::cout << "Угол в радианах (a ^ b) : ";
@@ -96,7 +96,7 @@ int main()
     }
     catch (DifferentSizes)
     {
-        std::cout << "Размеры не совпадают.\n";
+        std::cout << "Ошибка размерности.\n";
     }
     catch (LensZero)
     {

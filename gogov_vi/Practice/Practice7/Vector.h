@@ -1,6 +1,7 @@
 ﻿#ifndef _VECTOR_H_
 #define _VECTOR_H_
 #include <iostream>
+typedef unsigned long long size_t;
 
 struct Vector
 {
