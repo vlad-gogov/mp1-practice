@@ -38,8 +38,6 @@ struct Vector
     friend std::istream& operator >> (std::istream &s, Vector & x);
     double& operator[](int index);
     const double& operator[](int index) const;
-    void* operator new(size_t _size);
-    void operator delete(void* ptr);
     ~Vector();
 };
 

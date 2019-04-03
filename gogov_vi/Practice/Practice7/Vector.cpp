@@ -304,16 +304,6 @@ double Vector::Angle(Vector & x)
     return result;
 }
 
-void* Vector::operator new(size_t _size)
-{
-    return (void*)(::new unsigned char[_size]);
-}
-
-void Vector::operator delete(void* ptr)
-{
-    delete (Vector*)ptr;
-}
-
 double& Vector::operator[](int index)
 {
     if ((index < size) && (index >= 0))
