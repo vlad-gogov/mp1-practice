@@ -139,9 +139,16 @@ void Matrix::Input()
     }
 }
 
-const double* Matrix::operator[](int x) const
+const double& Matrix::operator[](int x) const
 {
     if (x >= (rows * cols))
-        return nullptr;
-    return &(arr[x]);
+        throw NoElements();
+    return arr[x];
+}
+
+double& Matrix::operator[](int x)
+{
+    if (x >= (rows * cols))
+        throw NoElements();
+    return arr[x];
 }

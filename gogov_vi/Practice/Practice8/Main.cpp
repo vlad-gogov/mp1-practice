@@ -5,7 +5,7 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    int _rows, _cols;
+    int _rows, _cols, index;
     double x;
     std::cout << "Введите размерность матрицы A (кол-во строк и столбцов через пробел): ";
     std::cin >> _rows >> _cols;
@@ -18,8 +18,11 @@ int main()
     b.Input();
     b.Output();
     Matrix c;
-    std::cout << "Введите число: ";
+    std::cout << "Введите число : ";
     std::cin >> x;
+
+    std::cout << "Введите индекс элемента : ";
+    std::cin >> index;
 
 
     std::cout << "Сложение матриц (A + B): ";
@@ -30,7 +33,7 @@ int main()
     }
     catch (DifferentSizes)
     {
-        std::cout << "Неверная размерность.";
+        std::cout << "Неверная размерность.\n";
     }
 
     std::cout << "Сложение матрицы с числом (A + " << x <<"): ";
@@ -41,7 +44,7 @@ int main()
     }
     catch (MatrixZero)
     {
-        std::cout << "Матрица имеет размеры 0x0.";
+        std::cout << "Матрица имеет размеры 0x0.\n";
     }
 
     std::cout << "Умножение матриц (A * B): ";
@@ -52,7 +55,7 @@ int main()
     }
     catch (DifferentSizes)
     {
-        std::cout << "Неверная размерность.";
+        std::cout << "Неверная размерность.\n";
     }
 
     std::cout << "Умножение матрицы на число (A * " << x << "): ";
@@ -63,7 +66,7 @@ int main()
     }
     catch (MatrixZero)
     {
-        std::cout << "Матрица имеет размеры 0x0.";
+        std::cout << "Матрица имеет размеры 0x0.\n";
     }
 
     std::cout << "Разность матриц (A - B): ";
@@ -74,7 +77,7 @@ int main()
     }
     catch (DifferentSizes)
     {
-        std::cout << "Неверная размерность.";
+        std::cout << "Неверная размерность.\n";
     }
 
     std::cout << "Разность матрицы и числа (A - " << x << "): ";
@@ -85,7 +88,26 @@ int main()
     }
     catch (MatrixZero)
     {
-        std::cout << "Матрица имеет размеры 0x0.";
+        std::cout << "Матрица имеет размеры 0x0.\n";
     }
 
+    std::cout << index << " элемент матрицы A: ";
+    try
+    {
+        std::cout << a[index] << "\n";
+    }
+    catch (NoElements)
+    {
+        std::cout << "Нет такого элемента матрицы.\n";
+    }
+
+    std::cout << index << " элемент матрицы B: ";
+    try
+    {
+        std::cout << b[index] << "\n";
+    }
+    catch (NoElements)
+    {
+        std::cout << "Нет такого элемента матрицы.\n";
+    }
 }

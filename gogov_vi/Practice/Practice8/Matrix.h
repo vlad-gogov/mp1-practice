@@ -20,13 +20,14 @@ public:
     Matrix operator*(const Matrix&);
     Matrix operator*(double);
     const Matrix operator=(const Matrix&);
-    const double* operator[](int) const;
-    const double* operator[](double) const;
+    const double& operator[](int) const;
+    double& operator[](int);
     void Output();
     void Input();
 };
 
 class DifferentSizes {};
 class MatrixZero {};
+class NoElements {};
 
 #endif
