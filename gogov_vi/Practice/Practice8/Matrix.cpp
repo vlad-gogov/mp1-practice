@@ -156,14 +156,14 @@ const double* Matrix::operator[](int x) const
 {
     if (x >= (rows * cols))
         throw NoElements();
-    return arr + x * cols + 1;
+    return arr + x * cols;
 }
 
 double* Matrix::operator[](int x)
 {
     if (x >= (rows * cols))
         throw NoElements();
-    return arr + x * cols + 1;
+    return arr + x * cols;
 }
 
 void Matrix::GenerationArr() 
