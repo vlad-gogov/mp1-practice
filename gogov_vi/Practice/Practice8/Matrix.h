@@ -1,6 +1,8 @@
 ﻿#ifndef _MATRIX_H_
 #define _MATRIX_H_
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 class Matrix
 {
@@ -10,7 +12,7 @@ class Matrix
 public:
     Matrix();
     Matrix(const Matrix&);
-    Matrix(int, int); // Уточнить
+    Matrix(int, int);
     Matrix(double*, int, int);
     ~Matrix();
     Matrix operator+(const Matrix&);
@@ -20,14 +22,16 @@ public:
     Matrix operator*(const Matrix&);
     Matrix operator*(double);
     const Matrix operator=(const Matrix&);
-    const double& operator[](int) const;
-    double& operator[](int);
+    const double* operator[](int) const;
+    double* operator[](int);
     void Output();
     void Input();
+	void GenerationArr();
 };
 
 class DifferentSizes {};
 class MatrixZero {};
 class NoElements {};
+
 
 #endif

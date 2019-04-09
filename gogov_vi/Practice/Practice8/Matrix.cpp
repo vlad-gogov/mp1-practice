@@ -5,6 +5,7 @@ Matrix::Matrix()
     rows = 0;
     cols = 0;
     arr = NULL;
+	srand((unsigned int)time(0));
 }
 
 Matrix::Matrix(const Matrix& x)
@@ -14,6 +15,7 @@ Matrix::Matrix(const Matrix& x)
     arr = new double[rows * cols];
     for (int i = 0; i < (x.rows * x.cols); i++)
         arr[i] = x.arr[i];
+	srand((unsigned int)time(0));
 }
 
 Matrix::Matrix(int _rows, int _cols)
@@ -23,6 +25,7 @@ Matrix::Matrix(int _rows, int _cols)
     arr = new double[rows * cols];
     for (int i = 0; i < (_rows * _cols); i++)
         arr[i] = 0;
+	srand((unsigned int)time(0));
 }
 
 Matrix::Matrix(double* _arr, int _rows, int _cols)
@@ -32,6 +35,7 @@ Matrix::Matrix(double* _arr, int _rows, int _cols)
     arr = new double[rows * cols];
     for (int i = 0; i < (_rows * _cols); i++)
         arr[i] = _arr[i];
+	srand((unsigned int)time(0));
 }
 
 Matrix::~Matrix()
@@ -139,16 +143,25 @@ void Matrix::Input()
     }
 }
 
-const double& Matrix::operator[](int x) const
+const double* Matrix::operator[](int x) const
 {
     if (x >= (rows * cols))
         throw NoElements();
-    return arr[x];
+    return arr + x * cols + 1;
 }
 
-double& Matrix::operator[](int x)
+double* Matrix::operator[](int x)
 {
     if (x >= (rows * cols))
         throw NoElements();
-    return arr[x];
+    return arr + x * cols + 1;
 }
+
+void Matrix::GenerationArr() 
+{
+	double lb = 1.0, rb = 10.0;
+	for (int i = 0; i < (rows * cols); i++)
+	{
+		arr[i] = lb + ((double)rand() / RAND_MAX) * (rb - lb);
+	}
+};

@@ -5,80 +5,127 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    int _rows, _cols, index;
-    double x;
-    std::cout << "Введите размерность матрицы A (кол-во строк и столбцов через пробел): ";
-    std::cin >> _rows >> _cols;
-    Matrix a(_rows, _cols);
-    a.Input();
+	Matrix a(3,3), b(3,3), c(2,2), d, f;
+	int x = 5;
+	a.GenerationArr();
+	b.GenerationArr();
+	c.GenerationArr();
+	std::cout << "Матрица A: ";
     a.Output();
-    std::cout << "Введите размерность матрицы B (кол-во строк и столбцов через пробел): ";
-    std::cin >> _rows >> _cols;
-    Matrix b(_rows, _cols);
-    b.Input();
+	std::cout << "Матрица B: ";
     b.Output();
-    Matrix c;
-    std::cout << "Введите число : ";
-    std::cin >> x;
-
-    std::cout << "Введите индекс элемента : ";
-    std::cin >> index;
-
+	std::cout << "Матрица C: ";
+	c.Output();
 
     std::cout << "Сложение матриц (A + B): ";
     try
     {
-        c = a + b;
-        c.Output();
+        d = a + b;
+        d.Output();
     }
     catch (DifferentSizes)
     {
         std::cout << "Неверная размерность.\n";
     }
+
+	std::cout << "Сложение матриц (A + C): ";
+	try
+	{
+		d = a + c;
+		d.Output();
+	}
+	catch (DifferentSizes)
+	{
+		std::cout << "Неверная размерность.\n";
+	}
 
     std::cout << "Сложение матрицы с числом (A + " << x <<"): ";
     try
     {
-        c = a + x;
-        c.Output();
+        d = a + x;
+        d.Output();
     }
     catch (MatrixZero)
     {
         std::cout << "Матрица имеет размеры 0x0.\n";
     }
+
+	std::cout << "Сложение матрицы с числом (F + " << x << "): ";
+	try
+	{
+		d = f + x;
+		d.Output();
+	}
+	catch (MatrixZero)
+	{
+		std::cout << "Матрица имеет размеры 0x0.\n";
+	}
 
     std::cout << "Умножение матриц (A * B): ";
     try
     {
-        c = a * b;
-        c.Output();
+        d = a * b;
+        d.Output();
     }
     catch (DifferentSizes)
     {
         std::cout << "Неверная размерность.\n";
     }
 
+	std::cout << "Умножение матриц (A * C): ";
+	try
+	{
+		d = a * c;
+		d.Output();
+	}
+	catch (DifferentSizes)
+	{
+		std::cout << "Неверная размерность.\n";
+	}
+
     std::cout << "Умножение матрицы на число (A * " << x << "): ";
     try
     {
-        c = a * x;
-        c.Output();
+        d = a * x;
+        d.Output();
     }
     catch (MatrixZero)
     {
         std::cout << "Матрица имеет размеры 0x0.\n";
     }
 
+	std::cout << "Умножение матрицы на число (f * " << x << "): ";
+	try
+	{
+		d = f * x;
+		d.Output();
+	}
+	catch (MatrixZero)
+	{
+		std::cout << "Матрица имеет размеры 0x0.\n";
+	}
+
     std::cout << "Разность матриц (A - B): ";
     try
     {
-        c = a - b;
-        c.Output();
+        d = a - b;
+        d.Output();
     }
     catch (DifferentSizes)
     {
         std::cout << "Неверная размерность.\n";
     }
+
+	std::cout << "Разность матриц (A - C): ";
+	try
+	{
+		d = a - c;
+		d.Output();
+	}
+	catch (DifferentSizes)
+	{
+		std::cout << "Неверная размерность.\n";
+	}
 
     std::cout << "Разность матрицы и числа (A - " << x << "): ";
     try
@@ -91,23 +138,14 @@ int main()
         std::cout << "Матрица имеет размеры 0x0.\n";
     }
 
-    std::cout << index << " элемент матрицы A: ";
-    try
-    {
-        std::cout << a[index] << "\n";
-    }
-    catch (NoElements)
-    {
-        std::cout << "Нет такого элемента матрицы.\n";
-    }
-
-    std::cout << index << " элемент матрицы B: ";
-    try
-    {
-        std::cout << b[index] << "\n";
-    }
-    catch (NoElements)
-    {
-        std::cout << "Нет такого элемента матрицы.\n";
-    }
+	std::cout << "Разность матрицы и числа (f - " << x << "): ";
+	try
+	{
+		c = f - x;
+		c.Output();
+	}
+	catch (MatrixZero)
+	{
+		std::cout << "Матрица имеет размеры 0x0.\n";
+	}
 }
