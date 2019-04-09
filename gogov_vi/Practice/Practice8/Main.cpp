@@ -17,6 +17,26 @@ int main()
 	std::cout << "Матрица C: ";
 	c.Output();
 
+	std::cout << "\nЭлемент матрица B[2][2]: ";
+	try
+	{
+		std::cout << b[2][2] << "\n";
+	}
+	catch (NoElements)
+	{
+		std::cout << "Нет элемента.\n";
+	}
+
+	std::cout << "\nЭлемент матрица A[4][4]: ";
+	try 
+	{
+		std::cout << a[3][3] << "\n";
+	}
+	catch (NoElements)
+	{
+		std::cout << "Нет элемента.\n\n";
+	}
+
     std::cout << "Сложение матриц (A + B): ";
     try
     {

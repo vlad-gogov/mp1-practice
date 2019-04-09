@@ -94,7 +94,7 @@ Matrix Matrix::operator-(double x)
 
 Matrix Matrix::operator*(const Matrix& x)
 {
-    if ((rows != x.cols) || (cols != x.rows))
+    if (rows != x.cols)
         throw DifferentSizes();
     Matrix result(rows, x.cols);
     for (int i = 0; i < rows; i++)
@@ -154,14 +154,14 @@ void Matrix::Input()
 
 const double* Matrix::operator[](int x) const
 {
-    if (x >= (rows * cols))
+    if (x > rows - 1)
         throw NoElements();
     return arr + x * cols;
 }
 
 double* Matrix::operator[](int x)
 {
-    if (x >= (rows * cols))
+    if (x > rows - 1)
         throw NoElements();
     return arr + x * cols;
 }
