@@ -12,8 +12,9 @@ Matrix::Matrix(const Matrix& x)
 {
     rows = x.rows;
     cols = x.cols;
-    arr = new double[rows * cols];
-    for (int i = 0; i < (x.rows * x.cols); i++)
+	int tmp = rows * cols;
+    arr = new double[tmp];
+    for (int i = 0; i < tmp; i++)
         arr[i] = x.arr[i];
 	srand((unsigned int)time(0));
 }
@@ -22,8 +23,9 @@ Matrix::Matrix(int _rows, int _cols)
 {
     rows = _rows;
     cols = _cols;
-    arr = new double[rows * cols];
-    for (int i = 0; i < (_rows * _cols); i++)
+	int tmp = rows * cols;
+    arr = new double[tmp];
+    for (int i = 0; i < tmp; i++)
         arr[i] = 0;
 	srand((unsigned int)time(0));
 }
@@ -32,8 +34,9 @@ Matrix::Matrix(double* _arr, int _rows, int _cols)
 {
     rows = _rows;
     cols = _cols;
-    arr = new double[rows * cols];
-    for (int i = 0; i < (_rows * _cols); i++)
+	int tmp = rows * cols;
+    arr = new double[tmp];
+    for (int i = 0; i < tmp; i++)
         arr[i] = _arr[i];
 	srand((unsigned int)time(0));
 }
@@ -50,7 +53,8 @@ Matrix Matrix::operator+(const Matrix& x)
     if ((rows != x.rows) || (cols != x.cols))
         throw DifferentSizes();
     Matrix result(rows, cols);
-    for (int i = 0; i < (rows * cols); i++)
+	int tmp = rows * cols;
+    for (int i = 0; i < tmp; i++)
         result.arr[i] = arr[i] + x.arr[i];
     return result;
 }
@@ -60,7 +64,8 @@ Matrix Matrix::operator+(double x)
     if ((rows == 0) || (cols == 0))
         throw MatrixZero();
     Matrix result(rows, cols);
-    for (int i = 0; i < (rows * cols); i++)
+	int tmp = rows * cols;
+	for (int i = 0; i < tmp; i++)
             result.arr[i] = arr[i] + x;
     return result;
 }
@@ -70,7 +75,8 @@ Matrix Matrix::operator-(const Matrix& x)
     if ((rows != x.rows) || (cols != x.cols))
         throw DifferentSizes();
     Matrix result(rows, cols);
-    for (int i = 0; i < (rows * cols); i++)
+	int tmp = rows * cols;
+	for (int i = 0; i < tmp; i++)
         result.arr[i] = arr[i] - x.arr[i];
     return result;
 }
@@ -80,7 +86,8 @@ Matrix Matrix::operator-(double x)
     if ((rows == 0) || (cols == 0))
         throw MatrixZero();
     Matrix result(rows, cols);
-    for (int i = 0; i < (rows * cols); i++)
+	int tmp = rows * cols;
+	for (int i = 0; i < tmp; i++)
         result.arr[i] = arr[i] - x;
     return result;
 }
@@ -102,7 +109,8 @@ Matrix Matrix::operator*(double x)
     if ((rows == 0) || (cols == 0))
         throw MatrixZero();
     Matrix result(rows, cols);
-    for (int i = 0; i < (rows * cols); i++)
+	int tmp = rows * cols;
+	for (int i = 0; i < tmp; i++)
         result.arr[i] = arr[i] * x;
     return result;
 }
@@ -115,8 +123,9 @@ const Matrix Matrix::operator=(const Matrix& x)
         delete[] arr;
     rows = x.rows;
     cols = x.cols;
-    arr = new double[x.rows * x.cols];
-    for (int i = 0; i < (rows * cols); i++)
+	int tmp = rows * cols;
+    arr = new double[tmp];
+	for (int i = 0; i < tmp; i++)
         arr[i] = x.arr[i];
     return *this;
 }
@@ -160,7 +169,8 @@ double* Matrix::operator[](int x)
 void Matrix::GenerationArr() 
 {
 	double lb = 1.0, rb = 10.0;
-	for (int i = 0; i < (rows * cols); i++)
+	int tmp = rows * cols;
+	for (int i = 0; i < tmp; i++)
 	{
 		arr[i] = lb + ((double)rand() / RAND_MAX) * (rb - lb);
 	}

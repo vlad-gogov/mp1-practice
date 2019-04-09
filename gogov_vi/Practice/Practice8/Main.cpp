@@ -5,7 +5,7 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-	Matrix a(3,3), b(3,3), c(2,2), d, f;
+	Matrix a(3, 3), b(3, 3), c(2, 2), d(0, 0), f(0, 0);
 	int x = 5;
 	a.GenerationArr();
 	b.GenerationArr();
