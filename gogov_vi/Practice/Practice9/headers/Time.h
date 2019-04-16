@@ -1,4 +1,4 @@
-#ifndef _TIME_H_
+﻿#ifndef _TIME_H_
 #define _TIME_H_
 #include <iostream>
 #include <fstream>
@@ -31,6 +31,13 @@ public:
 
 	friend std::ostream& operator<<(std::ostream&, const time&);
 	friend std::ofstream& operator<<(std::ofstream&, const time&);
+};
+
+class bad_time : std::exception
+{
+	const std::string what_str = "Некоректное время.";
+public:
+	const char* what() const;
 };
 
 #endif 

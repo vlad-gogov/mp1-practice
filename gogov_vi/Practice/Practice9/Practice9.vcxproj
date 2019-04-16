@@ -157,6 +157,7 @@
     <ClCompile Include="implementation\TaskStd.cpp" />
     <ClCompile Include="implementation\Time.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="implementation\\ToDoList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="headers\TaskDay.h" />
     <ClInclude Include="headers\TaskStd.h" />
     <ClInclude Include="headers\Time.h" />
+    <ClInclude Include="headers\ToDoList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -39,6 +39,9 @@
     <ClCompile Include="implementation\Time.cpp">
       <Filter>implementation</Filter>
     </ClCompile>
+    <ClCompile Include="implementation\\ToDoList.cpp">
+      <Filter>implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h">
@@ -57,6 +60,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="headers\Time.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ToDoList.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

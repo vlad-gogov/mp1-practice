@@ -1,4 +1,4 @@
-#ifndef _TASK_H_
+﻿#ifndef _TASK_H_
 #define _TASK_H_
 #include <iostream>
 #include <fstream>
@@ -8,21 +8,24 @@
 
 class task	
 {
-	unsigned id; 
 	char type;
 public:
-	std::string title;
-	date Date;
+	std::string description;
+	date start_day;
 	task();
-	task(const task&);
+	task(task&);
 	virtual ~task();
 
-	void set_title(std::string);
-	char get_type();
-	unsigned get_id();
+	virtual time get_start() = 0;
+	virtual time get_end() = 0;
+
+	virtual time set_start(time);
+	virtual time set_end(time);
+
+	unsigned set_type();
+	void get_type(unsigned);
 	void get_title();
 
-	virtual unsigned get_duration() = 0;
 	virtual void print() = 0;
 	virtual void print(std::ofstream&) = 0;
 };

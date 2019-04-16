@@ -1,35 +1,50 @@
-#include "../headers/Task.h"
+﻿#include "../headers/Task.h"
 
 task::task()
 {
-	id = 0;
+//	id = 0;
 	type = -1;
-	title = "0";
+	description = "";
 }
 
-task::task(const task& x)
+task::task(task& x)
 {
-	id = x.id;
+	//id = x.id;
 	type = x.type;
-	title = x.title;
+	description = x.description;
 }
-
-void task::set_title(std::string _title)
+/*
+void task::set_id(unsigned x)
 {
-	title = _title;
+	id = x;
 }
-
-char task::get_type()
+*/
+unsigned task::set_type()
 {
 	return type;
 }
 
-unsigned task::get_id()
+void task::get_type(unsigned _type)
 {
-	return id;
+	type = _type;
+}
+
+time task::set_start(time x)
+{
+	return time();
+}
+
+time task::set_end(time x)
+{
+	return time();
 }
 
 void task::get_title()
 {
-	std::cout << title;
+	std::cout << description;
+}
+
+task::~task()
+{
+
 }

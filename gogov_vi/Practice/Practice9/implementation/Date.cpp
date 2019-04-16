@@ -1,8 +1,10 @@
-#include "../headers/Date.h"
+п»ї#include "../headers/Date.h"
 
 date::date()
 {
-	d = m = y = 0U;
+	d = 1U;
+	m = 1U;
+	y = 1970U;
 }
 
 date::date(const date& x)
@@ -16,25 +18,25 @@ date::date(unsigned _d, unsigned _m, unsigned _y)
 {
 	if ((_d < 0) || (_d > 31))
 	{
-		throw "Invalid date - day";
+		throw bad_date();
 	}
 	if ((_m < 0) || (_m > 12))
 	{
-		throw "Invalid date - month";
+		throw bad_date();
 	}
 	if (_y < 0)
 	{
-		throw "Invalid date - year";
+		throw bad_date();
 	}
 	if (((_y % 400) == 0) || ((_y % 100 != 0) && (_y % 4 == 0)))
 	{
 		if ((_m == 2) && (_d >= 29))
-			throw "Invalid date - month #2";
+			throw bad_date();
 	}
 	if ((_m == 4) || (_m == 6) || (_m == 8) || (_m == 10))
 	{
 		if (_d > 30)
-			throw "Invalid date - month";
+			throw bad_date();
 	}
 	d = _d;
 	m = _m;
@@ -44,34 +46,6 @@ date::date(unsigned _d, unsigned _m, unsigned _y)
 date::~date()
 {
 	d = m = y = 0U;
-}
-
-date date::set_day(unsigned _d)
-{
-	if ((d < 0) || (d > 32))
-	{
-		throw "Неверные данные";
-	}
-	d = _d;
-	return *this;
-}
-
-date date::set_month(unsigned _m)
-{
-	if ((m < 0) || (m > 13))
-	{
-		throw "Неверные данные";
-	}
-	m = _m;
-	return *this;
-}
-
-date date::set_year(unsigned _y)
-{
-	if (_y < 0)
-		throw "Неверные данные";
-	y = _y;
-	return *this;
 }
 
 unsigned date::get_days()
@@ -99,57 +73,70 @@ const date date::operator=(const date& x)
 
 std::ostream& operator<<(std::ostream& s , const date& x)
 {
-	s << "Дата (ДД.ММ.ГГГГ): " << x.d << x.m << x.y;
+	if (x.d < 10)
+		s << "0" << x.d << ".";
+	else
+		s << x.d << ".";
+	if (x.m < 10)
+		s << "0" << x.m << ".";
+	else
+		s << x.m << ".";
+	s << x.y;
 	return s;
 }
 
-std::ofstream& operator<<(std::ofstream& s, const date& x)
-{
 
-}
-/*
 bool date::operator==(const date& x) const
 {
 	if ((d == x.d) && (m == x.m) && (y == x.y))
-		return 1;
-	return 0;
+		return true;
+	return false;
 }
 
 bool date::operator!=(const date& x) const
 {
 	if ((d != x.d) || (m != x.m) || (y != x.y))
-		return 1;
-	return 0;
+		return true;
+	return false;
 }
 
 bool date::operator>(const date& x) const
 {
-	if (y > x.y)
-		return 1;
-	if (y < x.y)
-		return 0;
-	if (m > x.m)
-		return 1;
-	if (m < x.m)
-		return 0;
-	if (d > x.d)
-		return 1;
-	if (d < x.d)
-		return 0;
+	if (*this == x)
+		return false;
+	if (y != x.y)
+		return y > x.y;
+	if (m != x.m)
+		return m > x.m;
+	if (d != x.d)
+		return d > x.d;
+	return false;
 }
 
 bool date::operator>=(const date& x) const
 {
-
+	return (*this == x) || (*this < x);
 }
 
 bool date::operator<(const date& x) const
 {
-
+	if (*this == x)
+		return false;
+	if (y != x.y)
+		return y < x.y;
+	if (m != x.m)
+		return m < x.m;
+	if (d != x.d)
+		return d < x.d;
+	return false;
 }
 
 bool date::operator<=(const date& x) const
 {
-
+	return (*this == x) || (*this > x);
 }
-*/
+
+const char* bad_date::what() const
+{
+	return "РќРµРІРµСЂРЅР°СЏ РґР°С‚Р°.";
+}
