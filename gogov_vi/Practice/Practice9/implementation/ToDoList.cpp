@@ -15,7 +15,7 @@ unsigned ToDoList::read_tasks()
 	List = new task*[cout_tasks];
 
 	char _type = -1;
-	for (int i = 0; i < cout_tasks; i++)
+	for (unsigned i = 0U; i < cout_tasks; i++)
 	{
 		getline(open_file, str);
 		_type = (char)stoul(str);
@@ -55,7 +55,7 @@ unsigned ToDoList::read_tasks()
 void ToDoList::print_tasks(date& D, unsigned count)
 {
 	int k = 0;
-	for (int i = 0; i < count; i++)
+	for (unsigned i = 0U; i < count; i++)
 	{
 		if (List[i]->start_day == D)
 			List[i]->print();
@@ -68,6 +68,7 @@ void ToDoList::print_tasks(date& D, unsigned count)
 
 void ToDoList::print_all_tasks(unsigned count)
 {
-	for (int i = 0; i < count; i++)
+	std::cout << std::endl << "Полный список дел: " << std::endl;
+	for (unsigned i = 0U; i < count; i++)
 		List[i]->print();
 }
