@@ -1,12 +1,12 @@
 ﻿#include "../headers/TaskStd.h"
 
-taskstd::taskstd()
+taskstd::taskstd() : task()
 {
 	get_type(0);
 	description = "";
 }
 
-taskstd::taskstd(taskstd& x)
+taskstd::taskstd(taskstd& x) : task(x)
 {
 	get_type(x.set_type());
 	description = x.description;
