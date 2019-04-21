@@ -30,9 +30,9 @@ public:
 
 class bad_date : std::exception 
 {
-	const std::string what_str = "Некоректная дата.";
+	const std::string what_str = "";
 public:
-	const char* what() const;
+	const char* what(char) const;
 };
 
 #endif 

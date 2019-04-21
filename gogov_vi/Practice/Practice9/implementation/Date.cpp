@@ -136,7 +136,12 @@ bool date::operator<=(const date& x) const
 	return (*this == x) || (*this > x);
 }
 
-const char* bad_date::what() const
+// 0 - Неверная дата при вводе
+// 1 - Неверная дата при считывании из файла
+const char* bad_date::what(char message) const
 {
-	return "Неверная дата.";
+	if(message == 0)
+		return "Некорректная дата при вводе.";
+	if (message == 1)
+		return "Некорректная дата при при считвании из файла.";
 }

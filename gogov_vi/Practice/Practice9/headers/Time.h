@@ -37,7 +37,7 @@ class bad_time : std::exception
 {
 	const std::string what_str = "Некоректное время.";
 public:
-	const char* what() const;
+	const char* what(char) const;
 };
 
 #endif 

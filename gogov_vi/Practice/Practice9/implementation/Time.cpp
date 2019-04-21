@@ -19,9 +19,9 @@ time::time(const time& x)
 time::time(unsigned _hour, unsigned _min)
 {
 	if ((_hour < 0) || (_hour > 24))
-		throw "Неправильные часы";
+		throw bad_time();
 	if ((_min < 0) || (_min > 60))
-		throw "Неправильные минуты";
+		throw bad_time();
 	hour = _hour;
 	min = _min;
 }
@@ -143,7 +143,8 @@ bool time::operator<=(const time& x) const
 	return false;
 }
 
-const char* bad_time::what() const
+const char* bad_time::what(char message) const
 {
-	return "Беда";
+	if(message == 0)
+		return "Неккоректное время.";
 }

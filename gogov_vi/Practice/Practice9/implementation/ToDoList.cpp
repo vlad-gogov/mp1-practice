@@ -22,7 +22,16 @@ unsigned ToDoList::read_tasks()
 		unsigned long _d = std::stoul(str.substr(2, 2));
 		unsigned long _m = std::stoul(str.substr(5, 2));
 		unsigned long _y = std::stoul(str.substr(8, 4));
-		date tmp(_d, _m, _y);
+		date tmp;
+		try
+		{
+			tmp = date(_d, _m, _y);;
+		}
+		catch (bad_date e)
+		{
+			std::cout << e.what(1) << std::endl << "Исправьте в файле строку " << i + 2 << ".";
+			return -1;
+		}
 
 		if (_type == 1)
 		{
@@ -38,11 +47,21 @@ unsigned ToDoList::read_tasks()
 			b->start_day = tmp;
 			unsigned long _h_start = std::stoul(str.substr(13, 2));
 			unsigned long _m_start = std::stoul(str.substr(16, 2));
-			time _start(_h_start, _m_start);
 			unsigned long _h_end = std::stoul(str.substr(19, 2));
 			unsigned long _m_end = std::stoul(str.substr(22, 2));
+			time _start;
+			time _end;
+			try
+			{
+				_start = time(_h_start, _m_start);
+				_end = time(_h_end, _m_end);
+			}
+			catch (bad_time e)
+			{
+				std::cout << e.what(0) << std::endl << "Исправьте в файле строку " << i + 2 << ".";
+				return -1;
+			}
 			b->description = str.substr(25);
-			time _end(_h_end, _m_end);
 			b->set_start(_start);
 			b->set_end(_end);
 			List[i] = b;
@@ -63,7 +82,7 @@ void ToDoList::print_tasks(date& D, unsigned count)
 			k++;
 	}
 	if (k == count)
-		std::cout << "Дел на эту дату нет. Отдыхай)))";
+		std::cout << "Дел на эту дату нет. Отдыхате)))";
 }
 
 void ToDoList::print_all_tasks(unsigned count)
