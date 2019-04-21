@@ -61,6 +61,11 @@ unsigned ToDoList::read_tasks()
 				std::cout << e.what(0) << std::endl << "Исправьте в файле строку " << i + 2 << ".";
 				return -1;
 			}
+			if (_end < _start)
+			{
+				std::cout << "Время начала задачи больше чем время конца. Строчка " << i + 2 << std::endl;
+				return -1;
+			}
 			b->description = str.substr(25);
 			b->set_start(_start);
 			b->set_end(_end);

@@ -41,7 +41,7 @@ time taskstd::set_end(time x)
 
 void taskstd::print()
 {
-	std::cout << "|" << description << "| [" << start_day << "] {Время начало: " << start << " Время конца: " << end << " Продолжительность: " << end - start << "}" << std::endl;
+	std::cout << "|" << description << "| [" << start_day << "] {Время начала: " << start << " Время конца: " << end << " Продолжительность: " << end - start << "}" << std::endl;
 }
 
 void taskstd::print(std::ofstream& s)
