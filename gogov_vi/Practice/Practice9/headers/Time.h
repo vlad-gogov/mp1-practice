@@ -30,7 +30,6 @@ public:
 	const time operator=(const time&);
 
 	friend std::ostream& operator<<(std::ostream&, const time&);
-	friend std::ofstream& operator<<(std::ofstream&, const time&);
 };
 
 class bad_time_hour : std::exception

@@ -14,20 +14,35 @@ unsigned ToDoList::read_tasks()
 	// Массив указателей
 	List = new task*[cout_tasks];
 
-	char _type = -1;
+	short _type = -1;
 	for (unsigned i = 0U; i < cout_tasks; i++)
 	{
 		getline(open_file, str);
-		_type = (char)stoul(str);
-		unsigned long _d = std::stoul(str.substr(2, 2));
-		unsigned long _m = std::stoul(str.substr(5, 2));
-		unsigned long _y = std::stoul(str.substr(8, 4));
-		date tmp;
+
+		// Считывание типа задачи
+		str = str.substr(str.find_first_not_of(' '));
+		_type = (short)std::stoul(str);
+
+		str = str.substr(str.find_first_of(' '));
+		str = str.substr(str.find_first_not_of(' '));
+
+		// Считывание даты
+		unsigned fields[3];
+		for (int i = 0; i < 2; i++) 
+		{
+			fields[i] = std::stoul(str.substr(0, str.find_first_of(".")));
+			str = str.substr(str.find_first_of(".") + 1);
+		}
+		fields[2] = std::stoul(str.substr(0, str.find_first_of(" ")));
+		str = str.substr(str.find_first_of(' '));
+		str = str.substr(str.find_first_not_of(' '));
+
+		date Date;
 		try
 		{
-			tmp = date(_d, _m, _y);;
+			Date = date(fields[0], fields[1], fields[2]);
 		}
-		catch (bad_date_input& e)
+		catch (bad_date_input & e)
 		{
 			std::cout << e.what() << std::endl << "Исправьте в файле строку " << i + 2 << ".";
 			return -1;
@@ -36,25 +51,43 @@ unsigned ToDoList::read_tasks()
 		if (_type == 1)
 		{
 			task* a = new taskday;
-			a->start_day = tmp;
-			a->description = str.substr(13);
+			a->start_day = Date;
+			a->description = str;
 			List[i] = a;
 		}
 
-		if (_type == 0)
+		if(_type == 0)
 		{
 			task* b = new taskstd;
-			b->start_day = tmp;
-			unsigned long _h_start = std::stoul(str.substr(13, 2));
-			unsigned long _m_start = std::stoul(str.substr(16, 2));
-			unsigned long _h_end = std::stoul(str.substr(19, 2));
-			unsigned long _m_end = std::stoul(str.substr(22, 2));
+			b->start_day = Date;
+			unsigned start_time[2];
+			unsigned end_time[2];
+
+			// Время начала
+			start_time[0] = (unsigned)std::stoul(str.substr(0, str.find_first_of(':')));
+			str = str.substr(str.find_first_of(':') + 1);
+			start_time[1] = (unsigned)std::stoul(str.substr(0, str.find_first_of(' ')));
+			str = str.substr(str.find_first_of(' '));
+
+			str = str.substr(str.find_first_of(' '));
+			str = str.substr(str.find_first_not_of(' '));
+
+			// Время конца
+			end_time[0] = (unsigned)std::stoul(str.substr(0, str.find_first_of(':')));
+			str = str.substr(str.find_first_of(':') + 1);
+			end_time[1] = (unsigned)std::stoul(str.substr(0, str.find_first_of(' ')));
+			str = str.substr(str.find_first_of(' ') + 1);
+
+			// Описание
+			str = str.substr(str.find_first_not_of(' '));
+			b->description = str;
+
 			time _start;
 			time _end;
 			try
 			{
-				_start = time(_h_start, _m_start);
-				_end = time(_h_end, _m_end);
+				_start = time(start_time[0], start_time[1]);
+				_end = time(end_time[0], end_time[1]);
 			}
 			catch (bad_time_hour& e)
 			{
@@ -71,7 +104,6 @@ unsigned ToDoList::read_tasks()
 				std::cout << "Время начала больше времени конца. Строчка:" << i + 2 << std::endl;
 				return -1;
 			}
-			b->description = str.substr(25);
 			b->set_start(_start);
 			b->set_end(_end);
 			List[i] = b;
