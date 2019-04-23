@@ -19,6 +19,12 @@ unsigned ToDoList::read_tasks()
 	{
 		getline(open_file, str);
 
+		if (!(str.empty()))
+		{
+			std::cout << "Количество задач не совпадает с введенным числом в файле." << std::endl;
+			return -1;
+		}
+
 		// Считывание типа задачи
 		str = str.substr(str.find_first_not_of(' '));
 		_type = (short)std::stoul(str);
