@@ -28,11 +28,32 @@ public:
 	friend std::ostream& operator<<(std::ostream&, const date&);
 };
 
-class bad_date : std::exception 
+class bad_date_day : std::exception
 {
-	const std::string what_str = "";
+	const std::string what_str = "Некорректное число.";
 public:
-	const char* what(char) const;
+	const char* what() const;
+};
+
+class bad_date_month : std::exception
+{
+	const std::string what_str = "Некорректный месяц.";
+public:
+	const char* what() const;
+};
+
+class bad_date_year : std::exception
+{
+	const std::string what_str = "Некорректный год.";
+public:
+	const char* what() const;
+};
+
+class bad_date_input : std::exception 
+{
+	const std::string what_str = "Некорректная дата при вводе.";
+public:
+	const char* what() const;
 };
 
 #endif 

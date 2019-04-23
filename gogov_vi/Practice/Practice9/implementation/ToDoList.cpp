@@ -27,9 +27,9 @@ unsigned ToDoList::read_tasks()
 		{
 			tmp = date(_d, _m, _y);;
 		}
-		catch (bad_date e)
+		catch (bad_date_input& e)
 		{
-			std::cout << e.what(1) << std::endl << "Исправьте в файле строку " << i + 2 << ".";
+			std::cout << e.what() << std::endl << "Исправьте в файле строку " << i + 2 << ".";
 			return -1;
 		}
 
@@ -56,14 +56,19 @@ unsigned ToDoList::read_tasks()
 				_start = time(_h_start, _m_start);
 				_end = time(_h_end, _m_end);
 			}
-			catch (bad_time e)
+			catch (bad_time_hour& e)
 			{
-				std::cout << e.what(0) << std::endl << "Исправьте в файле строку " << i + 2 << ".";
+				std::cout << e.what()  << " Исправьте в файле строку " << i + 2 << ".";
 				return -1;
 			}
-			if (_end < _start)
+			catch (bad_time_min& e)
 			{
-				std::cout << "Время начала задачи больше чем время конца. Строчка " << i + 2 << std::endl;
+				std::cout << e.what() << " Исправьте в файле строку " << i + 2 << ".";
+				return -1;
+			}
+			if (_start > _end)
+			{
+				std::cout << "Время начала больше времени конца. Строчка:" << i + 2 << std::endl;
 				return -1;
 			}
 			b->description = str.substr(25);
