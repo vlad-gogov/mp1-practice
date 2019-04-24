@@ -7,10 +7,11 @@
 class ToDoList 
 {
 	task** List;
+	unsigned count_tasks;
 public:
-	unsigned read_tasks();
-	void print_tasks(date&, unsigned);
-	void print_all_tasks(unsigned);
+	short read_tasks();
+	void print_tasks(date&);
+	void print_all_tasks();
 };
 
 #endif

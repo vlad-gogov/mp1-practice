@@ -9,8 +9,7 @@ int main()
 	char flag_input_date;
 	unsigned day, month, year; 
 	// Считывание файла
-	unsigned count_tasks = to_do_list.read_tasks();
-	if (count_tasks == -1)
+	if (to_do_list.read_tasks() == 1)
 		return -1;
 	std::cout << "Введите дату через пробелы (Формат ДД ММ ГГГГ): ";
 	date D;
@@ -38,7 +37,7 @@ int main()
 		}
 	} while (flag_input_date == 1);
 
-	to_do_list.print_tasks(D, count_tasks);
+	to_do_list.print_tasks(D);
 
 	return 0;
 }

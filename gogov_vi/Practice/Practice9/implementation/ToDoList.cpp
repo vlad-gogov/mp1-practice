@@ -1,28 +1,30 @@
 ﻿#include "../headers/ToDoList.h"
 
-unsigned ToDoList::read_tasks()
+short ToDoList::read_tasks()
 {
 	std::ifstream open_file;
 	open_file.open("ToDoList.txt");
 	std::string str;
+	size_t pos = 0;
 
 	// Кол-во задач
 	getline(open_file, str);
 	size_t digits = str.find_first_of("1234567890+-");
-	unsigned cout_tasks = atoi(str.c_str() + digits);
+	count_tasks = atoi(str.c_str() + digits);
 	
 	// Массив указателей
-	List = new task*[cout_tasks];
+	List = new task*[count_tasks];
 
 	short _type = -1;
-	for (unsigned i = 0U; i < cout_tasks; i++)
+	for (unsigned i = 0U; i < count_tasks; i++)
 	{
 		getline(open_file, str);
 
-		if (!(str.empty()))
+		if (str.empty())
 		{
 			std::cout << "Количество задач не совпадает с введенным числом в файле." << std::endl;
-			return -1;
+			count_tasks = 0;
+			return 1;
 		}
 
 		// Считывание типа задачи
@@ -34,12 +36,14 @@ unsigned ToDoList::read_tasks()
 
 		// Считывание даты
 		unsigned fields[3];
-		for (int i = 0; i < 2; i++) 
+		for (int i = 0; i < 3; i++) 
 		{
-			fields[i] = std::stoul(str.substr(0, str.find_first_of(".")));
-			str = str.substr(str.find_first_of(".") + 1);
+			pos = str.find_first_not_of("1234567890");
+			fields[i] = (unsigned)std::stoul(str.substr(0, pos));
+			str = str.substr(pos + 1);
 		}
-		fields[2] = std::stoul(str.substr(0, str.find_first_of(" ")));
+		
+		
 		str = str.substr(str.find_first_of(' '));
 		str = str.substr(str.find_first_not_of(' '));
 
@@ -70,19 +74,23 @@ unsigned ToDoList::read_tasks()
 			unsigned end_time[2];
 
 			// Время начала
-			start_time[0] = (unsigned)std::stoul(str.substr(0, str.find_first_of(':')));
-			str = str.substr(str.find_first_of(':') + 1);
-			start_time[1] = (unsigned)std::stoul(str.substr(0, str.find_first_of(' ')));
-			str = str.substr(str.find_first_of(' '));
+			for (int i = 0; i < 2; i++)
+			{
+				pos = str.find_first_not_of("1234567890");
+				start_time[i] = (unsigned)std::stoul(str.substr(0, pos));
+				str = str.substr(pos + 1);
+			}
 
 			str = str.substr(str.find_first_of(' '));
 			str = str.substr(str.find_first_not_of(' '));
 
 			// Время конца
-			end_time[0] = (unsigned)std::stoul(str.substr(0, str.find_first_of(':')));
-			str = str.substr(str.find_first_of(':') + 1);
-			end_time[1] = (unsigned)std::stoul(str.substr(0, str.find_first_of(' ')));
-			str = str.substr(str.find_first_of(' ') + 1);
+			for (int i = 0; i < 2; i++)
+			{
+				pos = str.find_first_not_of("1234567890");
+				end_time[i] = (unsigned)std::stoul(str.substr(0, pos));
+				str = str.substr(pos + 1);
+			}
 
 			// Описание
 			str = str.substr(str.find_first_not_of(' '));
@@ -97,17 +105,17 @@ unsigned ToDoList::read_tasks()
 			}
 			catch (bad_time_hour& e)
 			{
-				std::cout << e.what()  << " Исправьте в файле строку " << i + 2 << ".";
+				std::cout << e.what()  << " Исправьте в файле строку " << i + 2 << '.';
 				return -1;
 			}
 			catch (bad_time_min& e)
 			{
-				std::cout << e.what() << " Исправьте в файле строку " << i + 2 << ".";
+				std::cout << e.what() << " Исправьте в файле строку " << i + 2 << '.';
 				return -1;
 			}
 			if (_start > _end)
 			{
-				std::cout << "Время начала больше времени конца. Строчка:" << i + 2 << std::endl;
+				std::cout << "Время начала больше времени конца. Строчка:" << i + 2 << std::endl << '.';
 				return -1;
 			}
 			b->set_start(_start);
@@ -116,26 +124,26 @@ unsigned ToDoList::read_tasks()
 		}
 	}
 	open_file.close();
-	return cout_tasks;
+	return 0;
 }
 
-void ToDoList::print_tasks(date& D, unsigned count)
+void ToDoList::print_tasks(date& D)
 {
 	int k = 0;
-	for (unsigned i = 0U; i < count; i++)
+	for (unsigned i = 0U; i < count_tasks; i++)
 	{
 		if (List[i]->start_day == D)
 			List[i]->print();
 		else
 			k++;
 	}
-	if (k == count)
+	if (k == count_tasks)
 		std::cout << "Дел на эту дату нет. Отдыхате)))";
 }
 
-void ToDoList::print_all_tasks(unsigned count)
+void ToDoList::print_all_tasks()
 {
 	std::cout << std::endl << "Полный список дел: " << std::endl;
-	for (unsigned i = 0U; i < count; i++)
+	for (unsigned i = 0U; i < count_tasks; i++)
 		List[i]->print();
 }
