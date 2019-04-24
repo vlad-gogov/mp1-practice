@@ -138,7 +138,7 @@ void ToDoList::print_tasks(date& D)
 			k++;
 	}
 	if (k == count_tasks)
-		std::cout << "Дел на эту дату нет. Отдыхате)))";
+		std::cout << "Дел на эту дату нет. Отдыхайте)))";
 }
 
 void ToDoList::print_all_tasks()
