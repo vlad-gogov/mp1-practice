@@ -1,4 +1,4 @@
-#ifndef _CONTAINER_H_
+п»ї#ifndef _CONTAINER_H_
 #define _CONTAINER_H_
 #include <exception>
 
@@ -58,7 +58,7 @@ template<typename T, int max_size>
 T& Container<T, max_size>::operator[](int idx) const
 {
 	if (idx >= count)
-		throw std::out_of_range("Выход за границы.\n");
+		throw std::out_of_range("Р’С‹С…РѕРґ Р·Р° РіСЂР°РЅРёС†С‹.\n");
 	return arr[idx];
 }
 
@@ -75,7 +75,7 @@ template<typename T, int max_size>
 void Container<T, max_size>::add_elem(T x)
 {
 	if(is_full())
-		throw std::out_of_range("Контейнер полный.\n");
+		throw std::out_of_range("РљРѕРЅС‚РµР№РЅРµСЂ РїРѕР»РЅС‹Р№.\n");
 	arr[count] = x;
 	count++;
 }
@@ -86,7 +86,7 @@ void Container<T, max_size>::delete_elem(T x)
 	int idx = find_elem(x);
 	if (idx == -1)
 	{
-		throw "Элемент не найден \n";
+		throw "Р­Р»РµРјРµРЅС‚ РЅРµ РЅР°Р№РґРµРЅ \n";
 	}
 	T tmp = arr[idx];
 	arr[idx] = arr[count - 1];
@@ -143,8 +143,6 @@ Container<T*, max_size>::Container()
 template<typename T, int max_size>
 Container<T*, max_size>::Container(const Container& x)
 {
-	delete[] arr;
-	arr = nullptr;
 	count = x.count;
 	arr = new T*[max_size];
 	for (int i = 0; i < count; i++)
@@ -177,7 +175,7 @@ template<typename T, int max_size>
 T*& Container<T*, max_size>::operator[](int idx) const
 {
 	if (idx >= count)
-		throw std::out_of_range("Выход за границы.\n");
+		throw std::out_of_range("Р’С‹С…РѕРґ Р·Р° РіСЂР°РЅРёС†С‹.\n");
 	return arr[idx];
 }
 
@@ -194,7 +192,7 @@ template<typename T, int max_size>
 void Container<T*, max_size>::add_elem(T x)
 {
 	if (is_full())
-		throw std::out_of_range("Контейнер полный.\n");
+		throw std::out_of_range("РљРѕРЅС‚РµР№РЅРµСЂ РїРѕР»РЅС‹Р№.\n");
 	T* tmp = new T;
 	*tmp = x;
 	**(arr + count) = *tmp;
@@ -208,7 +206,7 @@ void Container<T*, max_size>::delete_elem(T x)
 	int idx = find_elem(x);
 	if (idx == -1)
 	{
-		throw "Элемент не найден. \n";
+		throw "Р­Р»РµРјРµРЅС‚ РЅРµ РЅР°Р№РґРµРЅ. \n";
 	}
 	delete arr[idx];
 	arr[idx] = arr[count - 1];
