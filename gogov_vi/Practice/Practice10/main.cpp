@@ -14,7 +14,7 @@ int main()
 		a.add_elem(i);
 	}
 	a.print();
-	std::cout << "Копиравание из a в b: ";
+	std::cout << "Копирование из a в b: ";
 	Container<double, 10> b(a);
 	b.print();
 	std::cout << "Добавление 11 элемента: ";
@@ -96,7 +96,7 @@ int main()
 	for (int i = 0; i < 10; i++)
 		c.add_elem(tmp[i]);
 	c.print();
-	std::cout << "Копиравание из c в d: ";
+	std::cout << "Копирование из c в d: ";
 	Container<double*, 10> d(c);
 	d.print();
 	std::cout << "Добавление 11 элемента: ";
