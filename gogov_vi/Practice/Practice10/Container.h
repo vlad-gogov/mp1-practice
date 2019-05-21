@@ -15,11 +15,11 @@ public:
 	~Container();
 	bool is_full() const;
 	bool is_empty() const;
-	int find_elem(T) const;
-	void add_elem(T);
-	void delete_elem(T);
+	int find_elem(const T) const;
+	void add_elem(const T);
+	void delete_elem(const T);
 	T& operator[](int) const;
-	void print();
+	void print() const;
 };
 
 template<typename T>
@@ -79,7 +79,7 @@ T& Container<T>::operator[](int idx) const
 }
 
 template<typename T>
-int Container<T>::find_elem(T x) const
+int Container<T>::find_elem(const T x) const
 {
 	for (int i = 0; i < count; i++)
 		if (x == arr[i])
@@ -88,7 +88,7 @@ int Container<T>::find_elem(T x) const
 }
 
 template<typename T>
-void Container<T>::add_elem(T x)
+void Container<T>::add_elem(const T x)
 {
 	if (is_full())
 		malloc();
@@ -97,7 +97,7 @@ void Container<T>::add_elem(T x)
 }
 
 template<typename T>
-void Container<T>::delete_elem(T x)
+void Container<T>::delete_elem(const T x)
 {
 	int idx = find_elem(x);
 	if (idx == -1)
@@ -111,7 +111,7 @@ void Container<T>::delete_elem(T x)
 }
 
 template<typename T>
-void Container<T>::print()
+void Container<T>::print() const
 {
 	for (int i = 0; i < count; i++)
 		std::cout << arr[i] << " ";
@@ -142,11 +142,11 @@ public:
 	~Container<T*>();
 	bool is_full() const;
 	bool is_empty() const;
-	int find_elem(T) const;
-	void add_elem(T);
-	void delete_elem(T);
+	int find_elem(const T) const;
+	void add_elem(const T);
+	void delete_elem(const T);
 	T*& operator[](int) const;
-	void print();
+	void print() const;
 };
 
 template<typename T>
@@ -169,7 +169,7 @@ void Container<T*>::malloc()
 }
 
 template<typename T>
-void Container<T*>::add_elem(T x)
+void Container<T*>::add_elem(const T x)
 {
 	if (is_full())
 		malloc();
@@ -218,7 +218,7 @@ T*& Container<T*>::operator[](int idx) const
 }
 
 template<typename T>
-int Container<T*>::find_elem(T x) const
+int Container<T*>::find_elem(const T x) const
 {
 	for (int i = 0; i < count; i++)
 		if (x == **(arr + i))
@@ -227,7 +227,7 @@ int Container<T*>::find_elem(T x) const
 }
 
 template<typename T>
-void Container<T*>::delete_elem(T x)
+void Container<T*>::delete_elem(const T x)
 {
 	int idx = find_elem(x);
 	if (idx == -1)
@@ -241,7 +241,7 @@ void Container<T*>::delete_elem(T x)
 }
 
 template<typename T>
-void Container<T*>::print()
+void Container<T*>::print() const
 {
 	for (int i = 0; i < count; i++)
 		std::cout << *(arr[i]) << " ";
