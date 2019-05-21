@@ -29,10 +29,13 @@ void pmenu()
 int searchcod(int cod)
 {
     int idx = -1, i;
-    for (i = 0; i < MAX; i++) {
+    for (i = 0; i < MAX; i++) 
+	{
 		if (cod == atoi(barcodes[i]))
+		{
 			idx = i;
-            break;
+			break;
+		}
     }
     return idx;
 }
