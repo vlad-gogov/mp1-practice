@@ -5,7 +5,7 @@
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	Container<double, 10> a;
+	Container<double> a;
 	double* tmp = new double[10];
 	std::cout << "Добавление 10 элементов: ";
 	for (int i = 0; i < 10; i++)
@@ -15,18 +15,11 @@ int main()
 	}
 	a.print();
 	std::cout << "Копирование из a в b: ";
-	Container<double, 10> b(a);
+	Container<double> b(a);
 	b.print();
 	std::cout << "Добавление 11 элемента: ";
-	try
-	{
-		a.add_elem(1);
-	}
-	catch (std::out_of_range e)
-	{
-		std::cout << e.what();
-	}
-
+	a.add_elem(1);
+	a.print();
 
 	std::cout << "a[5] = ";
 	try
@@ -92,22 +85,16 @@ int main()
 
 	std::cout << "\nМассив указателей. \n";
 
-	Container<double*, 10> c;
+	Container<double*> c;
 	for (int i = 0; i < 10; i++)
 		c.add_elem(tmp[i]);
 	c.print();
 	std::cout << "Копирование из c в d: ";
-	Container<double*, 10> d(c);
+	Container<double*> d(c);
 	d.print();
 	std::cout << "Добавление 11 элемента: ";
-	try
-	{
-		c.add_elem(1);
-	}
-	catch (std::out_of_range e)
-	{
-		std::cout << e.what();
-	}
+	c.add_elem(1);
+	c.print();
 
 
 	std::cout << "a[5] = ";
@@ -123,7 +110,7 @@ int main()
 	std::cout << "a[10] = ";
 	try
 	{
-		std::cout << c[10] << "\n";
+		std::cout << *(c[10]) << "\n";
 	}
 	catch (std::out_of_range e)
 	{
@@ -140,7 +127,6 @@ int main()
 	{
 		std::cout << e.what();
 	}
-	c.print();
 	std::cout << "Индекс элемента равный 5: ";
 	idx = c.find_elem(5);
 	if (idx == -1)

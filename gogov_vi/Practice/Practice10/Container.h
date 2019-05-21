@@ -2,11 +2,13 @@
 #define _CONTAINER_H_
 #include <exception>
 
-template<typename T, int max_size>
+template<typename T>
 class Container 
 {
 	T* arr;
-	int count;
+	int count, max_size;
+
+	void malloc();
 public:
 	Container();
 	Container(const Container&);
@@ -20,50 +22,64 @@ public:
 	void print();
 };
 
-template<typename T, int max_size>
-Container<T, max_size>::Container()
+template<typename T>
+Container<T>::Container()
 {
-	count = 0;
-	arr = new T[max_size];
+	count = max_size = 0;
+	arr = nullptr;
 }
 
-template<typename T, int max_size>
-Container<T, max_size>::Container(const Container& x)
+template<typename T>
+void Container<T>::malloc()
+{
+	max_size += 10;
+	T* new_arr = new T[max_size];
+	for (int i = 0; i < count; i++)
+		new_arr[i] = arr[i];
+	if (arr)
+		delete[] arr;
+	arr = new_arr;
+
+}
+
+template<typename T>
+Container<T>::Container(const Container& x)
 {
 	count = x.count;
+	max_size = x.max_size;
 	arr = new T[max_size];
 	for (int i = 0; i < count; i++)
 		arr[i] = x.arr[i];
 }
 
-template<typename T, int max_size>
-Container<T, max_size>::~Container()
+template<typename T>
+Container<T>::~Container()
 {
 	delete[] arr;
 }
 
-template<typename T, int max_size>
-bool Container<T, max_size>::is_full() const
+template<typename T>
+bool Container<T>::is_full() const
 {
 	return (count == max_size) ? 1 : 0;
 }
 
-template<typename T, int max_size>
-bool Container<T, max_size>::is_empty() const
+template<typename T>
+bool Container<T>::is_empty() const
 {
 	return (count == 0) ? 1 : 0;
 }
 
-template<typename T, int max_size>
-T& Container<T, max_size>::operator[](int idx) const
+template<typename T>
+T& Container<T>::operator[](int idx) const
 {
 	if (idx >= count)
 		throw std::out_of_range("Выход за границы.\n");
 	return arr[idx];
 }
 
-template<typename T, int max_size>
-int Container<T, max_size>::find_elem(T x) const
+template<typename T>
+int Container<T>::find_elem(T x) const
 {
 	for (int i = 0; i < count; i++)
 		if (x == arr[i])
@@ -71,17 +87,17 @@ int Container<T, max_size>::find_elem(T x) const
 	return -1;
 }
 
-template<typename T, int max_size>
-void Container<T, max_size>::add_elem(T x)
+template<typename T>
+void Container<T>::add_elem(T x)
 {
-	if(is_full())
-		throw std::out_of_range("Контейнер полный.\n");
+	if (is_full())
+		malloc();
 	arr[count] = x;
 	count++;
 }
 
-template<typename T, int max_size>
-void Container<T, max_size>::delete_elem(T x)
+template<typename T>
+void Container<T>::delete_elem(T x)
 {
 	int idx = find_elem(x);
 	if (idx == -1)
@@ -94,8 +110,8 @@ void Container<T, max_size>::delete_elem(T x)
 	count--;
 }
 
-template<typename T, int max_size>
-void Container<T, max_size>::print()
+template<typename T>
+void Container<T>::print()
 {
 	for (int i = 0; i < count; i++)
 		std::cout << arr[i] << " ";
@@ -113,15 +129,17 @@ void Container<T, max_size>::print()
 
 ///////////////////////////////////////////////////////////////////////////////
 
-template<typename T, int max_size>
-class Container<T*, max_size>
+template<typename T>
+class Container<T*>
 {
 	T** arr;
-	int count;
+	int count, max_size;
+
+	void malloc();
 public:
-	Container<T*, max_size>();
-	Container<T*, max_size>(const Container&);
-	~Container<T*, max_size>();
+	Container<T*>();
+	Container<T*>(const Container&);
+	~Container<T*>();
 	bool is_full() const;
 	bool is_empty() const;
 	int find_elem(T) const;
@@ -131,56 +149,76 @@ public:
 	void print();
 };
 
-template<typename T, int max_size>
-Container<T*, max_size>::Container()
+template<typename T>
+Container<T*>::Container()
 {
-	count = 0;
-	arr = new T*[max_size];
-	for (int i = 0; i < max_size; i++)
-		arr[i] = new T;
+	count = max_size = 0;
+	arr = nullptr;
 }
 
-template<typename T, int max_size>
-Container<T*, max_size>::Container(const Container& x)
+template<typename T>
+void Container<T*>::malloc()
+{
+	max_size += 10;
+	T** new_arr = new T*[max_size];
+	for (int i = 0; i < count; i++)
+		new_arr[i] = new T(**(arr + i));
+	if (arr)
+		delete[] arr;
+	arr = new_arr;
+}
+
+template<typename T>
+void Container<T*>::add_elem(T x)
+{
+	if (is_full())
+		malloc();
+	arr[count] = new T(x);
+	count++;
+}
+
+template<typename T>
+Container<T*>::Container(const Container& x)
 {
 	count = x.count;
-	arr = new T*[max_size];
+	max_size = x.max_size;
+	arr = new T*[x.max_size];
 	for (int i = 0; i < count; i++)
 	{
 		arr[i] = new T(**(x.arr + i));
 	}
 }
 
-template<typename T, int max_size>
-Container<T*, max_size>::~Container()
+template<typename T>
+Container<T*>::~Container()
 {
 	for (int i = 0; i < count; i++)
 		delete arr[i];
 	delete arr;
 }
 
-template<typename T, int max_size>
-bool Container<T*, max_size>::is_full() const
+template<typename T>
+bool Container<T*>::is_full() const
 {
 	return (count == max_size) ? 1 : 0;
 }
 
-template<typename T, int max_size>
-bool Container<T*, max_size>::is_empty() const
+template<typename T>
+bool Container<T*>::is_empty() const
 {
 	return (count == 0) ? 1 : 0;
 }
 
-template<typename T, int max_size>
-T*& Container<T*, max_size>::operator[](int idx) const
+template<typename T>
+T*& Container<T*>::operator[](int idx) const
 {
 	if (idx >= count)
 		throw std::out_of_range("Выход за границы.\n");
 	return arr[idx];
 }
 
-template<typename T, int max_size>
-int Container<T*, max_size>::find_elem(T x) const
+template<typename T>
+int Container<T*>::find_elem(T x) const
 {
 	for (int i = 0; i < count; i++)
 		if (x == **(arr + i))
@@ -188,20 +226,8 @@ int Container<T*, max_size>::find_elem(T x) const
 	return -1;
 }
 
-template<typename T, int max_size>
-void Container<T*, max_size>::add_elem(T x)
-{
-	if (is_full())
-		throw std::out_of_range("Контейнер полный.\n");
-	T* tmp = new T;
-	*tmp = x;
-	**(arr + count) = *tmp;
-	delete tmp;
-	count++;
-}
-
-template<typename T, int max_size>
-void Container<T*, max_size>::delete_elem(T x)
+template<typename T>
+void Container<T*>::delete_elem(T x)
 {
 	int idx = find_elem(x);
 	if (idx == -1)
@@ -214,8 +240,8 @@ void Container<T*, max_size>::delete_elem(T x)
 
 }
 
-template<typename T, int max_size>
-void Container<T*, max_size>::print()
+template<typename T>
+void Container<T*>::print()
 {
 	for (int i = 0; i < count; i++)
 		std::cout << *(arr[i]) << " ";
