@@ -29,16 +29,6 @@ void task::get_type(unsigned _type)
 	type = _type;
 }
 
-time task::set_start(time x)
-{
-	return time();
-}
-
-time task::set_end(time x)
-{
-	return time();
-}
-
 void task::get_title()
 {
 	std::cout << description;

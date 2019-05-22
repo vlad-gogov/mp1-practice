@@ -19,16 +19,6 @@ taskday::~taskday()
 
 }
 
-time taskday::get_start()
-{
-	return time();
-}
-
-time taskday::get_end()
-{
-	return time();
-}
-
 void taskday::print()
 {
 	std::cout << "|" << description << "| [" << start_day << "]" << std::endl;

@@ -16,12 +16,6 @@ public:
 	task(task&);
 	virtual ~task();
 
-	virtual time get_start() = 0;
-	virtual time get_end() = 0;
-
-	virtual time set_start(time);
-	virtual time set_end(time);
-
 	unsigned set_type();
 	void get_type(unsigned);
 	void get_title();

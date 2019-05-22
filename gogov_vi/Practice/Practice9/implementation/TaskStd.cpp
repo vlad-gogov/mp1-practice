@@ -12,6 +12,11 @@ taskstd::taskstd(taskstd& x) : task(x)
 	description = x.description;
 }
 
+taskstd::taskstd(const date day, const time start, const time end) : task(), start(start), end(end)
+{
+	start_day = day;
+}
+
 taskstd::~taskstd()
 {
 

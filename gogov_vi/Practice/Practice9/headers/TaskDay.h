@@ -9,9 +9,6 @@ public:
 	taskday(taskday&);
 	~taskday();
 
-	time get_start();
-	time get_end();
-
 	virtual void print();
 	void print(std::ofstream&);
 };

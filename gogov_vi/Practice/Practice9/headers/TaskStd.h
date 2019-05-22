@@ -8,6 +8,7 @@ public:
 	time start;
 	time end;
 	taskstd();
+	taskstd(const date,const time, const time);
 	taskstd(taskstd&);
 	~taskstd();
 
@@ -16,7 +17,7 @@ public:
 	time set_start(time);
 	time set_end(time);
 
-	virtual void print();
+	virtual void print(); 
 	void print(std::ofstream&);
 };
 

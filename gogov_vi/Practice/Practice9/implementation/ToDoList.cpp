@@ -118,8 +118,8 @@ short ToDoList::read_tasks()
 				std::cout << "Время начала больше времени конца. Строчка:" << i + 2 << std::endl << '.';
 				return -1;
 			}
-			b->set_start(_start);
-			b->set_end(_end);
+			((taskstd*)b)->start = _start;
+			((taskstd*)b)->end = _end;
 			List[i] = b;
 		}
 	}
