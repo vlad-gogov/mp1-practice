@@ -20,8 +20,8 @@ void main()
     else
     {
         printf("Введите координаты вектора через пробелы: ");
-        Input(a);
-        Output(a);
+        Input(&a);
+        Output(&a);
     }
 
 
@@ -33,8 +33,8 @@ void main()
     else
     {
         printf("Введите координаты вектора через пробелы: ");
-        Input(b);
-        Output(b);
+        Input(&b);
+        Output(&b);
     }
 
 
@@ -51,14 +51,14 @@ void main()
         if (code)
             printf("Не возможно сложить два вектора разной длины.");
         else
-            Output(c);
+            Output(&c);
         break;
     case 2:
         code = Sub(a, b, &c);
         if (code)
             printf("Не возможно вычесть два вектора разной длины.");
         else
-            Output(c);
+            Output(&c);
         break;
     case 3:
         code = Scal(a, b, &rez);

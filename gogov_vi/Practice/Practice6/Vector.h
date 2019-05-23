@@ -11,9 +11,9 @@ void New(Vector*);
 // Создание вектора
 int Create(int , Vector*);
 // Ввод вектора
-void Input(Vector);
+void Input(Vector*);
 // Вывод вектора
-void Output(Vector);
+void Output(Vector*);
 // Удаление вектора
 int Delete(Vector*);
 // Суммирование векторов

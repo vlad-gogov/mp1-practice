@@ -26,19 +26,19 @@ int Create(int _n, Vector* result)
 	return 1;
 }
 
-void Input(Vector x)
+void Input(Vector* x)
 {
 	int i = 0;
-	for (i = 0; i < x.dim; i++)
-		scanf("%f", x.val + i);
+	for (i = 0; i < x->dim; i++)
+		scanf("%f", (x->val + i));
 }
 
-void Output(Vector x)
+void Output(Vector* x)
 {
 	int i = 0;
 	printf("( ");
-	for (i = 0; i < x.dim; i++)
-		printf("%.f ", x.val[i]);
+	for (i = 0; i < x->dim; i++)
+		printf("%.f ", x->val[i]);
 	printf(")\n");
 }
 
