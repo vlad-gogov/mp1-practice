@@ -302,87 +302,89 @@ void main()
     double time_spent;
     setlocale(LC_ALL, "Russian");
     printf("Файловый менеджер.\nДля закрытия программы нажмите на крестик.\n");
-    while (1) {
-            entpath(&path);
-            count_files = ListDirectoryContents(path, &fileNames, &filesize);
-            if (count_files == -1)
-            {
-                printf("Неверно введен путь. Попробуйте снова\n");
-                continue;
-            }
-            if (count_files == 0)
-            {
-                printf("В папке отсутствуют файлы. Попробуйте снова\n");
-                continue;
-            }
+    while (1) 
+	{
+        entpath(&path);
+        count_files = ListDirectoryContents(path, &fileNames, &filesize);
+        if (count_files == -1)
+        {
+            printf("Неверно введен путь. Попробуйте снова\n");
+            continue;
+        }
+        if (count_files == 0)
+        {
+            printf("В папке отсутствуют файлы. Попробуйте снова\n");
+            continue;
+        }
         err = 0;
         size = (ULONGLONG*)malloc(count_files * sizeof(ULONGLONG));
         fileId = (int*)malloc(count_files * sizeof(int));
         for (i = 0; i < count_files; i++)
         {
-              fileId[i] = i;
-              size[i] = filesize[i];
+            fileId[i] = i;
+            size[i] = filesize[i];
         }
         printf("Файлов найдено: %d\n", count_files);
         for (i = 0; i < count_files; i++)
             wprintf(L"Файл: %s Размер: %lld байт\n", fileNames[i], filesize[i]);
         menu();
         scanf("%d%*с", &men);
-            switch (men) {
-            case 1:
-                begin = clock();
-                choose(size, count_files, fileId);
-                end = clock();
-                break;
-            case 2:
-                begin = clock();
-                insert(size, count_files, fileId);
-                end = clock();
-                break;
-            case 3:
-                begin = clock();
-                bubble(size, count_files, fileId);
-                end = clock();
-                break;
-            case 4:
-                begin = clock();
-                err = countingsort(size, count_files, fileId);
-                end = clock();
-                break;
-            case 5:
-                begin = clock();
-                quicksort(size, fileId[0], fileId[count_files - 1], fileId);
-                end = clock();
-                break;
-            case 6:
-                begin = clock();
-                mergesort(size, fileId, fileId[0], fileId[count_files - 1]);
-                end = clock();
-                break;
-            default:
-				menu();
-				scanf("%d", &men);
-            }
-            time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-            if (err != 1)
-            {
-                print_newId(filesize, fileNames, count_files, fileId);
-                printf("Время сортировки данных: %.3lf секунд\n", time_spent);
-                printf("-----------------------------------------------------------\n");
-            }
-            else
-            {
-                printf("Диапазон размеров файлов большой ");
-                printf("для сортировки подсчетом.\n");
-                printf("Попробуйте снова, не используя сортироку подсчетом.\n");
-            }
-			getchar();
-            free(fileId);
-            free(size);
-            free(filesize);
-            for (i = 0; i < count_files; i++)
-                free(fileNames[i]);
-            free(fileNames);
-            count_files = 0;
+        switch (men) 
+        {
+        case 1:
+            begin = clock();
+            choose(size, count_files, fileId);
+            end = clock();
+            break;
+        case 2:
+            begin = clock();
+            insert(size, count_files, fileId);
+            end = clock();
+            break;
+        case 3:
+            begin = clock();
+            bubble(size, count_files, fileId);
+            end = clock();
+            break;
+        case 4:
+            begin = clock();
+            err = countingsort(size, count_files, fileId);
+            end = clock();
+            break;
+        case 5:
+            begin = clock();
+            quicksort(size, fileId[0], fileId[count_files - 1], fileId);
+            end = clock();
+            break;
+        case 6:
+            begin = clock();
+            mergesort(size, fileId, fileId[0], fileId[count_files - 1]);
+            end = clock();
+            break;
+        default:
+            menu();
+            scanf("%d", &men);
         }
+        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+        if (err != 1)
+        {
+            print_newId(filesize, fileNames, count_files, fileId);
+            printf("Время сортировки данных: %.3lf секунд\n", time_spent);
+            printf("-----------------------------------------------------------\n");
+        }
+        else
+        {
+            printf("Диапазон размеров файлов большой ");
+            printf("для сортировки подсчетом.\n");
+            printf("Попробуйте снова, не используя сортироку подсчетом.\n");
+        }
+        getchar();
+        free(fileId);
+        free(size);
+        free(filesize);
+        for (i = 0; i < count_files; i++)
+            free(fileNames[i]);
+        free(fileNames);
+        count_files = 0;
+    }
 }
