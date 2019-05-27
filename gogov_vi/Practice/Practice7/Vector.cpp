@@ -32,12 +32,12 @@ Vector::Vector(int _size, double* array)
         elements[i] = array[i];
 }
 
-int Vector::getsize()
+int Vector::getsize() const
 {
     return size;
 }
 
-void Vector::PrintVector()
+void Vector::PrintVector() const
 {
     for (int i = 0; i < size; i++)
         std::cout << elements[i] << " ";
@@ -49,7 +49,7 @@ Vector::~Vector()
     size = 0;
 }
 
-void Vector::Input()
+void Vector::Input() const
 {
     if (size)
     {
@@ -79,38 +79,36 @@ Vector Vector::operator-(const Vector & x)
     {
         throw DifferentSizes();
     }
-	Vector result(size);
+    Vector result(size);
     for (int i = 0; i < x.size; i++)
         result.elements[i] = elements[i] - x.elements[i];
     return result;
 }
 
-Vector Vector::operator++()
+Vector& Vector::operator++()
 {
-	Vector result(*this);;
     for (int i = 0; i < size; i++)
-        result.elements[i]++;
-    return result;
+        elements[i]++;
+    return (*this);
 }
 
-Vector Vector::operator--()
+Vector& Vector::operator--()
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
-    Vector result(*this);
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     for (int i = 0; i < size; i++)
-        result.elements[i]--;
-    return result;
+        elements[i]--;
+    return (*this);
 }
 
 Vector Vector::operator--(int)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector result(*this);
     for (int i = 0; i < size; i++)
         result.elements[i]--;
@@ -119,10 +117,10 @@ Vector Vector::operator--(int)
 
 Vector Vector::operator++(int)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector result(*this);
     for (int i = 0; i < size; i++)
         result.elements[i]++;
@@ -131,27 +129,27 @@ Vector Vector::operator++(int)
 
 Vector Vector::operator+()
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector result(*this);
     return result;
 }
 
 Vector Vector::operator-()
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector result (*this);
     for (int i = 0; i < size; i++)
         result,elements[i] *= -1;
     return result;
 }
 
-double Vector::operator*(const Vector & x)
+double Vector::operator*(const Vector & x) const
 {
     if ((x.size != size) || (size <= 0) || (x.size <= 0))
     {
@@ -165,10 +163,10 @@ double Vector::operator*(const Vector & x)
 
 Vector Vector::operator+(double a)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector result(*this);
     for (int i = 0; i < size; i++)
         result.elements[i] += a;
@@ -178,10 +176,10 @@ Vector Vector::operator+(double a)
 
 Vector Vector::operator*(double a)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector result(*this);
     for (int i = 0; i < size; i++)
         result.elements[i] *= a;
@@ -190,10 +188,10 @@ Vector Vector::operator*(double a)
 
 Vector Vector::operator-(double a)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector result(*this);
     for (int i = 0; i < size; i++)
         result.elements[i] -= a;
@@ -202,10 +200,10 @@ Vector Vector::operator-(double a)
 
 Vector Vector::operator/(double a)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector res (*this);
     for (int i = 0; i < size; i++)
         res.elements[i] = res.elements[i] / a;
@@ -214,10 +212,10 @@ Vector Vector::operator/(double a)
 
 Vector Vector::operator+=(const Vector & x)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector res(*this);
     for (int i = 0; i < size; i++)
         res.elements[i] = res.elements[i] + x.elements[i];
@@ -226,21 +224,19 @@ Vector Vector::operator+=(const Vector & x)
 
 Vector Vector::operator-=(const Vector & x)
 {
-	if (size <= 0)
-	{
-		throw DifferentSizes();
-	}
+    if (size <= 0)
+    {
+        throw DifferentSizes();
+    }
     Vector res(*this);
     for (int i = 0; i < size; i++)
         res.elements[i] = res.elements[i] - x.elements[i];
     return res;
 }
 
-double Vector::operator*=(const Vector & x)
+Vector Vector::operator*=(double a)
 {
-    double result = 0;
-    result = (*this) * x;
-    return result;
+    return ((*this) * a);
 }
 
 const Vector& Vector::operator=(const Vector & x)
@@ -256,7 +252,7 @@ const Vector& Vector::operator=(const Vector & x)
     return *this;
 }
 
-bool Vector::operator==(const Vector & x)
+bool Vector::operator==(const Vector & x) const
 {
     if (size != x.size)
         return false;
@@ -284,17 +280,17 @@ std::istream& operator >> (std::istream & s, Vector & x)
     return s;
 }
 
-double Vector::Len()
+double Vector::Len() const
 {
     if (size < 0)
-        throw Sizes();
+        throw DifferentSizes();
     double result = 0;
     for (int i = 0; i < size; i++)
         result += elements[i] * elements[i];
     return sqrt(result);
 }
 
-double Vector::Angle(Vector & x)
+double Vector::Angle(const Vector & x) const
 {
     double lens = x.Len() * Len();
     double scal = (*this) * x;
@@ -316,4 +312,19 @@ const double& Vector::operator[](int index) const
     if ((index < size) && (index >= 0))
         return elements[index];
     throw VectorBadIndexException();
+}
+
+const char* DifferentSizes::what() const
+{
+    return what_str.c_str();
+}
+
+const char* LensZero::what() const
+{
+    return what_str.c_str();
+}
+
+const char* VectorBadIndexException::what() const
+{
+    return what_str.c_str();
 }

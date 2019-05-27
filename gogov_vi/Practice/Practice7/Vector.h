@@ -7,32 +7,32 @@ struct Vector
     int size;
     double* elements;
     Vector();
-    int getsize();
-    void PrintVector();
-    void Input();
+    int getsize() const;
+    void PrintVector() const;
+    void Input() const;
     Vector(const Vector& tmp);
     Vector(int _size);
     Vector(int _size, double* array);
-    double Len();
+    double Len() const;
     Vector operator+(const Vector & x);
     const Vector& operator=(const Vector & x);
     Vector operator-(const Vector & x);
-    double operator*(const Vector & x);
+    double operator*(const Vector & x) const;
     Vector operator+(double a);
     Vector operator*(double a);
     Vector operator-(double a);
     Vector operator/(double a);
-    Vector operator++();
-    Vector operator--();
+    Vector& operator++();
+    Vector& operator--();
     Vector operator++(int);
     Vector operator--(int);
     Vector operator+();
     Vector operator-();
     Vector operator+=(const Vector & x);
     Vector operator-=(const Vector & x);
-    double operator*=(const Vector & x);
-    bool operator==(const Vector & x);
-    double Angle(Vector & x);
+    Vector operator*=(double a);
+    bool operator==(const Vector & x) const;
+    double Angle(const Vector & x) const;
     friend std::ostream& operator << (std::ostream &s, const Vector & x);
     friend std::istream& operator >> (std::istream &s, Vector & x);
     double& operator[](int index);
@@ -40,22 +40,25 @@ struct Vector
     ~Vector();
 };
 
-class DifferentSizes {};
-
-class Sizes {};
-
-class LensZero {};
-
-class VectorBadIndexException {};
-
-class VectorElemException
+class DifferentSizes : std::exception
 {
+	const std::string what_str = "Ошибка размерности.\n";
 public:
-    int info;
-    VectorElemException(int _info)
-    {
-        info = _info;
-    }
+	const char* what() const;
+};
+
+class LensZero : std::exception 
+{
+	const std::string what_str = "Деление на ноль невозможно.\n";
+public:
+	const char* what() const;
+};
+
+class VectorBadIndexException : std::exception
+{
+	const std::string what_str = "Неверный индекс.\n";
+public:
+	const char* what() const;
 };
 
 
