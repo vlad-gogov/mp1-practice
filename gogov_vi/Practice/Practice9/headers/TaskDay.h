@@ -5,12 +5,12 @@
 class taskday : public task
 {
 public:
-	taskday();
-	taskday(taskday&);
-	~taskday();
+    taskday();
+    taskday(taskday&);
+    ~taskday();
 
-	virtual void print();
-	void print(std::ofstream&);
+    virtual void print();
+    void print(std::ofstream&);
 };
 
 #endif 

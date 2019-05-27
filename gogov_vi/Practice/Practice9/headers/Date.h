@@ -5,55 +5,55 @@
 
 class date
 {
-	unsigned d, m, y;
+    unsigned d, m, y;
 public:
-	date();
-	date(const date&);
-	date(unsigned, unsigned, unsigned);
-	~date();
+    date();
+    date(const date&);
+    date(unsigned, unsigned, unsigned);
+    ~date();
 
-	unsigned get_days();
-	unsigned get_month();
-	unsigned get_year();
+    unsigned get_days() const;
+    unsigned get_month() const;
+    unsigned get_year() const;
 
-	const date operator=(const date&);
+    const date& operator=(const date&);
 
-	bool operator==(const date&) const;
-	bool operator!=(const date&) const;
-	bool operator>(const date&) const;
-	bool operator>=(const date&) const;
-	bool operator<(const date&) const;
-	bool operator<=(const date&) const;
+    bool operator==(const date&) const;
+    bool operator!=(const date&) const;
+    bool operator>(const date&) const;
+    bool operator>=(const date&) const;
+    bool operator<(const date&) const;
+    bool operator<=(const date&) const;
 
-	friend std::ostream& operator<<(std::ostream&, const date&);
+    friend std::ostream& operator<<(std::ostream&, const date&);
 };
 
 class bad_date_day : std::exception
 {
-	const std::string what_str = "Некорректное число.";
+    const std::string what_str = "Некорректное число.";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 class bad_date_month : std::exception
 {
-	const std::string what_str = "Некорректный месяц.";
+    const std::string what_str = "Некорректный месяц.";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 class bad_date_year : std::exception
 {
-	const std::string what_str = "Некорректный год.";
+    const std::string what_str = "Некорректный год.";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 class bad_date_input : std::exception 
 {
-	const std::string what_str = "Некорректная дата при вводе.";
+    const std::string what_str = "Некорректная дата при вводе.";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 #endif 

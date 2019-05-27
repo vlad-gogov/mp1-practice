@@ -2,16 +2,12 @@
 
 taskday::taskday() : task()
 {
-	get_type(1);
-	description = "";
-	//set_id(0);
+    description = "";
 }
 
 taskday::taskday(taskday& x) : task(x)
 {
-	 get_type(x.set_type());
-	 //set_id(x.get_id);
-	 description = x.description;
+     description = x.description;
 }
 
 taskday::~taskday()
@@ -21,7 +17,7 @@ taskday::~taskday()
 
 void taskday::print()
 {
-	std::cout << "|" << description << "| [" << start_day << "]" << std::endl;
+    std::cout << "|" << description << "| [" << start_day << "]" << std::endl;
 }
 
 void taskday::print(std::ofstream& s)

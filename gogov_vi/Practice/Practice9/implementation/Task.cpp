@@ -2,36 +2,17 @@
 
 task::task()
 {
-//	id = 0;
-	type = -1;
-	description = "";
+    description = "";
 }
 
 task::task(task& x)
 {
-	//id = x.id;
-	type = x.type;
-	description = x.description;
-}
-/*
-void task::set_id(unsigned x)
-{
-	id = x;
-}
-*/
-unsigned task::set_type()
-{
-	return type;
+    description = x.description;
 }
 
-void task::get_type(unsigned _type)
+void task::get_title() const
 {
-	type = _type;
-}
-
-void task::get_title()
-{
-	std::cout << description;
+    std::cout << description;
 }
 
 task::~task()

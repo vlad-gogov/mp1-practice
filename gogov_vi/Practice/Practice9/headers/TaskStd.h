@@ -5,20 +5,18 @@
 class taskstd : public task
 {
 public:
-	time start;
-	time end;
-	taskstd();
-	taskstd(const date,const time, const time);
-	taskstd(taskstd&);
-	~taskstd();
+    time start;
+    time end;
+    taskstd();
+    taskstd(const date,const time, const time);
+    taskstd(taskstd&);
+    ~taskstd();
 
-	time get_start();
-	time get_end();
-	time set_start(time);
-	time set_end(time);
+    time set_start(time);
+    time set_end(time);
 
-	virtual void print(); 
-	void print(std::ofstream&);
+    virtual void print(); 
+    void print(std::ofstream&);
 };
 
 #endif 
