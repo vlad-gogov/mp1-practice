@@ -12,24 +12,21 @@ Vector::Vector(const Vector& tmp)
 {
     size = tmp.size;
     elements = new double[tmp.size];
-    for (int i = 0; i < tmp.size; i++)
-        elements[i] = tmp.elements[i];
+    memcpy(elements, tmp.elements, (sizeof(double) * tmp.size));
 }
 
 Vector::Vector(int _size)
 {
     size = _size;
     elements = new double[size];
-    for (int i = 0; i < size; i++)
-        elements[i] = 0;
+    memset(elements, 0, (sizeof(double) * size));
 }
 
 Vector::Vector(int _size, double* array)
 {
     size = _size;
     elements = new double[size];
-    for (int i = 0; i < size; i++)
-        elements[i] = array[i];
+    memcpy(elements, array, (sizeof(double) * size));
 }
 
 int Vector::getsize() const
