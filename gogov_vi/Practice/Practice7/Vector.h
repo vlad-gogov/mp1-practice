@@ -42,23 +42,23 @@ struct Vector
 
 class DifferentSizes : std::exception
 {
-	const std::string what_str = "Ошибка размерности.\n";
+    const std::string what_str = "Ошибка размерности.\n";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 class LensZero : std::exception 
 {
-	const std::string what_str = "Деление на ноль невозможно.\n";
+    const std::string what_str = "Деление на ноль невозможно.\n";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 class VectorBadIndexException : std::exception
 {
-	const std::string what_str = "Неверный индекс.\n";
+    const std::string what_str = "Неверный индекс.\n";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 
