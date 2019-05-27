@@ -21,17 +21,34 @@ public:
     Matrix operator-(double);
     Matrix operator*(const Matrix&);
     Matrix operator*(double);
-    const Matrix operator=(const Matrix&);
+    const Matrix& operator=(const Matrix&);
     const double* operator[](int) const;
     double* operator[](int);
-    void Output();
-    void Input();
-	void GenerationArr();
+    void Output() const;
+    void Input() const;
+    void GenerationArr() const;
 };
 
-class DifferentSizes {};
-class MatrixZero {};
-class NoElements {};
+class DifferentSizes : std::exception
+{
+	const std::string what_str = "Неверная размерность.\n";
+public:
+	const char* what() const;
+};
+
+class MatrixZero : std::exception 
+{
+	const std::string what_str = "Матрица имеет размеры 0x0.\n";
+public:
+	const char* what() const;
+};
+
+class NoElements : std::exception 
+{
+	const std::string what_str = "Элемент не найден.\n";
+public:
+	const char* what() const;
+};
 
 
 #endif
