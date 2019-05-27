@@ -31,23 +31,23 @@ public:
 
 class DifferentSizes : std::exception
 {
-	const std::string what_str = "Неверная размерность.\n";
+    const std::string what_str = "Неверная размерность.\n";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
-class MatrixZero : std::exception 
+class MatrixZero : std::exception
 {
-	const std::string what_str = "Матрица имеет размеры 0x0.\n";
+    const std::string what_str = "Матрица имеет размеры 0x0.\n";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
-class NoElements : std::exception 
+class NoElements : std::exception
 {
-	const std::string what_str = "Элемент не найден.\n";
+    const std::string what_str = "Элемент не найден.\n";
 public:
-	const char* what() const;
+    const char* what() const;
 };
 
 
