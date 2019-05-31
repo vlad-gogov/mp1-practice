@@ -5,7 +5,7 @@
 #define PROCENT 37
 #define MAX_LEN 17
 
-int barcode, count = 0, scancheck;
+int count = 0, scancheck;
 char barcodes[MAX][5] = { "7899" , "9730" , "4430" , "3965" , "5364" , "4828" , "7281" };
 char name[MAX][MAX_LEN] = { "Сок Мультифрукт","Хлеб нарезной","Булки из Атака",
 "Big Bon","Сыр с плесенью","Молоко Свежесть","Бумага Туалетная" };
@@ -13,7 +13,7 @@ int price[MAX] = { 62, 27, 19, 21, 499, 32, 52 };
 int sale[MAX] = { 5, 2, 50, 10, 1, 9, 9 };
 int check[MAX];
 int count_check[MAX];
-float sumall[MAX];
+char barcode[4];
 
 
 void pmenu()
@@ -29,21 +29,25 @@ void pmenu()
 int searchcod(int cod)
 {
     int idx = -1, i;
-    for (i = 0; i < MAX; i++) {
+    for (i = 0; i < MAX; i++) 
+	{
 		if (cod == atoi(barcodes[i]))
+		{
 			idx = i;
-            break;
+			break;
+		}
     }
     return idx;
 }
 
 void scancod()
 {
-    int i, j;
+    int i, j, tmp_code;
     float skid = 0.0f, k = 0.0f;
     printf("Введите штрих-код: ");
-    scanf("%d", &barcode);
-    i = searchcod(barcode);
+    scanf("%s", &barcode);
+	tmp_code = atoi(barcode);
+    i = searchcod(tmp_code);
     scancheck = i;
     if (i == -1)
     {
@@ -87,8 +91,7 @@ void checkall()
         {
             skid = price[i] * (1 - (float)(sale[i] * 0.01));
             printf("| %7s | ", barcodes[i]);
-            for (j = 0; j < MAX_LEN - 1; j++)
-                printf("%c", name[i][j]);
+            printf("%16s", name[i]);
             printf("| %11d | %5d%c | %15.2f | %7d|\n", price[i], sale[i], PROCENT, skid, count_check[i]);
             j = 0;
         }
@@ -106,12 +109,8 @@ float totalsum()
     {
         if (check[i] == 1)
         {
-            sumall[i] = (price[i] * (1 - (float)(sale[i] * 0.01))) * count_check[i];
+            itog += (price[i] * (1 - (float)(sale[i] * 0.01))) * count_check[i];
         }
-    }
-    for (i = 0; i < MAX; i++)
-    {
-        itog += sumall[i];
     }
     printf("Общая стоимость: %.2f рублей\n", itog);
 }
