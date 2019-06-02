@@ -56,9 +56,8 @@ void scancod()
     else
     {
         skid = price[i] * (1 - (float)(sale[i] / 100.00));
-        for (j = 0; j < MAX_LEN; j++)
-            printf("%c", name[i][j]);
-        printf("| Цена за ед. %4d | Скидка %2d%c | Цена со скидкой %.2f\n",
+        printf("%s", name[i]);
+        printf(" | Цена за ед. %4d | Скидка %2d%c | Цена со скидкой %.2f\n",
             price[i], sale[i], PROCENT, skid);
     }
 }
