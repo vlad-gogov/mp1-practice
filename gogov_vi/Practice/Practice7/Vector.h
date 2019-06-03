@@ -8,8 +8,6 @@ struct Vector
     double* elements;
     Vector();
     int getsize() const;
-    void PrintVector() const;
-    void Input() const;
     Vector(const Vector& tmp);
     Vector(int _size);
     Vector(int _size, double* array);
@@ -24,13 +22,13 @@ struct Vector
     Vector operator/(double a);
     Vector& operator++();
     Vector& operator--();
-    Vector operator++(int);
-    Vector operator--(int);
+    Vector& operator++(int);
+    Vector& operator--(int);
     Vector operator+();
     Vector operator-();
-    Vector operator+=(const Vector & x);
-    Vector operator-=(const Vector & x);
-    Vector operator*=(double a);
+    const Vector& operator+=(const Vector & x);
+    const Vector& operator-=(const Vector & x);
+    const Vector& operator*=(double a);
     bool operator==(const Vector & x) const;
     double Angle(const Vector & x) const;
     friend std::ostream& operator << (std::ostream &s, const Vector & x);

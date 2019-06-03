@@ -34,28 +34,10 @@ int Vector::getsize() const
     return size;
 }
 
-void Vector::PrintVector() const
-{
-    for (int i = 0; i < size; i++)
-        std::cout << elements[i] << " ";
-}
-
 Vector::~Vector()
 {
     delete[] elements;
     size = 0;
-}
-
-void Vector::Input() const
-{
-    if (size)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            std::cout << "Введите " << i + 1 << " элемент: ";
-            std::cin >> elements[i];
-        }
-    }
 }
 
 Vector Vector::operator+(const Vector & x)
@@ -100,7 +82,7 @@ Vector& Vector::operator--()
     return (*this);
 }
 
-Vector Vector::operator--(int)
+Vector& Vector::operator--(int)
 {
     if (size <= 0)
     {
@@ -112,7 +94,7 @@ Vector Vector::operator--(int)
     return result;
 }
 
-Vector Vector::operator++(int)
+Vector& Vector::operator++(int)
 {
     if (size <= 0)
     {
@@ -207,7 +189,7 @@ Vector Vector::operator/(double a)
     return res;
 }
 
-Vector Vector::operator+=(const Vector & x)
+const Vector& Vector::operator+=(const Vector & x)
 {
     if (size <= 0)
     {
@@ -219,7 +201,7 @@ Vector Vector::operator+=(const Vector & x)
     return res;
 }
 
-Vector Vector::operator-=(const Vector & x)
+const Vector& Vector::operator-=(const Vector & x)
 {
     if (size <= 0)
     {
@@ -231,7 +213,7 @@ Vector Vector::operator-=(const Vector & x)
     return res;
 }
 
-Vector Vector::operator*=(double a)
+const Vector& Vector::operator*=(double a)
 {
     return ((*this) * a);
 }
