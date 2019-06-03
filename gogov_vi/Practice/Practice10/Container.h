@@ -29,6 +29,8 @@ public:
     }
     friend std::istream& operator >> (std::istream& s, Container& x)
     {
+        if (x.size == 0)
+            throw "Контейнер пуст.";
         for (int i = 0; i < x.count; i++)
             s >> x.arr[i];
         return s;
@@ -168,6 +170,8 @@ public:
     }
     friend std::istream& operator >> (std::istream& s, Container& x)
     {
+        if (x.size == 0)
+            throw "Контейнер пуст.";
         for (int i = 0; i < x.count; i++)
             s >> *(x.arr[i]);
         return s;
@@ -269,7 +273,6 @@ void Container<T*>::delete_elem(const T* x)
     delete arr[idx];
     arr[idx] = arr[count - 1];
     count--;
-
 }
 
 #endif 
