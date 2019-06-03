@@ -20,7 +20,19 @@ public:
     void delete_elem(const T);
     T& operator[](int);
     const T& operator[](int) const;
-    void print() const;
+    friend std::ostream& operator << (std::ostream& s, const Container& x)
+    {
+        for (int i = 0; i < x.count; i++)
+            s << x.arr[i] << " ";
+        s << "\n";
+        return s;
+    }
+    friend std::istream& operator >> (std::istream& s, Container& x)
+    {
+        for (int i = 0; i < x.count; i++)
+            s >> x.arr[i];
+        return s;
+    }
 };
 
 template<typename T>
@@ -117,13 +129,6 @@ void Container<T>::delete_elem(const T x)
     count--;
 }
 
-template<typename T>
-void Container<T>::print() const
-{
-    for (int i = 0; i < count; i++)
-        std::cout << arr[i] << " ";
-    std::cout << "\n";
-}
 
 
 
@@ -154,7 +159,19 @@ public:
     void delete_elem(const T*);
     T*& operator[](int);
     const T*& operator[](int) const;
-    void print() const;
+    friend std::ostream& operator << (std::ostream& s, const Container& x)
+    {
+        for (int i = 0; i < x.count; i++)
+            s << *(x.arr[i]) << " ";
+        s << "\n";
+        return s;
+    }
+    friend std::istream& operator >> (std::istream& s, Container& x)
+    {
+        for (int i = 0; i < x.count; i++)
+            s >> *(x.arr[i]);
+        return s;
+    }
 };
 
 template<typename T>
@@ -171,8 +188,7 @@ void Container<T*>::malloc()
     T** new_arr = new T*[max_size];
     for (int i = 0; i < count; i++)
         new_arr[i] = new T(**(arr + i));
-    if (arr)
-        delete[] arr;
+    delete[] arr;
     arr = new_arr;
 }
 
@@ -254,14 +270,6 @@ void Container<T*>::delete_elem(const T* x)
     arr[idx] = arr[count - 1];
     count--;
 
-}
-
-template<typename T>
-void Container<T*>::print() const
-{
-    for (int i = 0; i < count; i++)
-        std::cout << *(arr[i]) << " ";
-    std::cout << "\n";
 }
 
 #endif 

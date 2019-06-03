@@ -13,13 +13,13 @@ int main()
         tmp[i] = i;
         a.add_elem(i);
     }
-    a.print();
+    std::cout << a;
     std::cout << "Копирование из a в b: ";
     Container<double> b(a);
-    b.print();
+    std::cout << b;
     std::cout << "Добавление 11 элемента: ";
     a.add_elem(1);
-    a.print();
+    std::cout << a;
 
     std::cout << "a[5] = ";
     try
@@ -61,7 +61,7 @@ int main()
     idx = a.find_elem(6);
     if (idx == -1)
         std::cout << "Элемент не найден." << "\n";
-    a.print();
+    std::cout << a;
     std::cout << "Удаление элемента равный 5: ";
     try 
     {
@@ -71,7 +71,7 @@ int main()
     {
         std::cout << k;
     }
-    a.print();
+    std::cout << a;
     std::cout << "Удаление элемента равный 7: ";
     try
     {
@@ -81,20 +81,20 @@ int main()
     {
         std::cout << k;
     }
-    a.print();
+    std::cout << a;
 
     std::cout << "\nМассив указателей. \n";
 
     Container<double*> c;
     for (int i = 0; i < 10; i++)
         c.add_elem(tmp + i);
-    c.print();
+    std::cout << c;
     std::cout << "Копирование из c в d: ";
     Container<double*> d(c);
-    d.print();
+    std::cout << d;
     std::cout << "Добавление 11 элемента: ";
     c.add_elem(tmp + 1);
-    c.print();
+    std::cout << c;
 
 
     std::cout << "a[5] = ";
@@ -146,7 +146,7 @@ int main()
     {
         std::cout << k;
     }
-    c.print();
+    std::cout << c;
     std::cout << "Удаление элемента равный 7: ";
     try
     {
@@ -156,6 +156,6 @@ int main()
     {
         std::cout << k;
     }
-    c.print();
+    std::cout << c;
     return 0;
 }
