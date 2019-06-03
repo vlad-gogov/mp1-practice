@@ -5,7 +5,6 @@ Matrix::Matrix()
     rows = 0;
     cols = 0;
     arr = NULL;
-    srand((unsigned int)time(0));
 }
 
 Matrix::Matrix(const Matrix& x)
@@ -96,11 +95,11 @@ Matrix Matrix::operator*(const Matrix& x)
     Matrix result(rows, x.cols);
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
-            for (int k = 0; k < result.cols; k++)
-            {
-                result.arr[i * cols + j] = 0.0;
+        {
+            result.arr[i * cols + j] = 0.0;
+			for (int k = 0; k < result.cols; k++)
                 result.arr[i * cols + j] += arr[i * result.cols + k] * x.arr[k * x.cols + j];
-            }
+        }
     return result;
 }
 
@@ -128,28 +127,6 @@ const Matrix& Matrix::operator=(const Matrix& x)
     for (int i = 0; i < tmp; i++)
         arr[i] = x.arr[i];
     return *this;
-}
-
-void Matrix::Output() const
-{
-    std::cout << "\n";
-    for (int i = 0; i < rows; i++)
-    {
-        std::cout << "| ";
-        for (int j = 0; j < cols; j++)
-            std::cout << arr[i * cols + j] << " ";
-        std::cout << "| \n";
-    }
-    std::cout << "\n";
-}
-
-void Matrix::Input() const
-{
-    std::cout << "Введите элементы матрицы (через пробел): ";
-    for (int i = 0; i < (rows * cols); i++)
-    {
-        std::cin >> arr[i];
-    }
 }
 
 const double* Matrix::operator[](int x) const
@@ -189,4 +166,18 @@ const char* NoElements::what() const
 const char* MatrixZero::what() const
 {
     return what_str.c_str();
+}
+
+std::ostream& operator << (std::ostream& s, const Matrix& x)
+{
+    s << "\n";
+	for (int i = 0; i < x.rows; i++)
+    {
+        s << "| ";
+        for (int j = 0; j < x.cols; j++)
+            s << x.arr[i * x.cols + j] << " ";
+        s << "| \n";
+    }
+    s << "\n";
+    return s;
 }

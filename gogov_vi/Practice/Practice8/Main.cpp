@@ -11,13 +11,13 @@ int main()
     b.GenerationArr();
     c.GenerationArr();
     std::cout << "Матрица A: ";
-    a.Output();
+    std::cout << a;
     std::cout << "Матрица B: ";
-    b.Output();
+    std::cout << b;
     std::cout << "Матрица C: ";
-    c.Output();
+    std::cout << c;
     std::cout << "Матрица K: ";
-    c.Output();
+    std::cout << c;
 
     std::cout << "\nЭлемент матрицы B[2][2]: ";
     try
@@ -43,7 +43,7 @@ int main()
     try
     {
         d = a + b;
-        d.Output();
+        std::cout << d;
     }
     catch (DifferentSizes& e)
     {
@@ -54,7 +54,7 @@ int main()
     try
     {
         d = a + k;
-        d.Output();
+        std::cout << d;
     }
     catch (DifferentSizes& e)
     {
@@ -65,7 +65,7 @@ int main()
     try
     {
         d = a + x;
-        d.Output();
+        std::cout << d;
     }
     catch (MatrixZero& e)
     {
@@ -76,7 +76,7 @@ int main()
     try
     {
         d = f + x;
-        d.Output();
+        std::cout << d;
     }
     catch (MatrixZero& e)
     {
@@ -87,7 +87,7 @@ int main()
     try
     {
         d = a * b;
-        d.Output();
+        std::cout << d;
     }
     catch (DifferentSizes& e)
     {
@@ -98,7 +98,7 @@ int main()
     try
     {
         d = a * c;
-        d.Output();
+        std::cout << d;
     }
     catch (DifferentSizes& e)
     {
@@ -109,7 +109,7 @@ int main()
     try
     {
         d = a * x;
-        d.Output();
+        std::cout << d;
     }
     catch (MatrixZero& e)
     {
@@ -120,7 +120,7 @@ int main()
     try
     {
         d = f * x;
-        d.Output();
+        std::cout << d;
     }
     catch (MatrixZero& e)
     {
@@ -131,7 +131,7 @@ int main()
     try
     {
         d = a - b;
-        d.Output();
+        std::cout << d;
     }
     catch (DifferentSizes& e)
     {
@@ -142,7 +142,7 @@ int main()
     try
     {
         d = a - c;
-        d.Output();
+        std::cout << d;
     }
     catch (DifferentSizes& e)
     {
@@ -153,7 +153,7 @@ int main()
     try
     {
         c = a - x;
-        c.Output();
+        std::cout << c;
     }
     catch (MatrixZero& e)
     {
@@ -164,7 +164,7 @@ int main()
     try
     {
         c = f - x;
-        c.Output();
+        std::cout << c;
     }
     catch (MatrixZero& e)
     {

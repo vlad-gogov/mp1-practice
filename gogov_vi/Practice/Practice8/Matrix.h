@@ -24,8 +24,7 @@ public:
     const Matrix& operator=(const Matrix&);
     const double* operator[](int) const;
     double* operator[](int);
-    void Output() const;
-    void Input() const;
+	friend std::ostream& operator << (std::ostream& s, const Matrix& x);
     void GenerationArr() const;
 };
 
