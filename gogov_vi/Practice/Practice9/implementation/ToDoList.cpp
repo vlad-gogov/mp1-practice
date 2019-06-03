@@ -1,9 +1,11 @@
 ﻿#include "../headers/ToDoList.h"
 
-short ToDoList::read_tasks()
+short ToDoList::read_tasks(std::string path)
 {
     std::ifstream open_file;
-    open_file.open("ToDoList.txt");
+    open_file.open(path);
+    if (!open_file.is_open())
+        return 1;
     std::string str;
     size_t pos = 0;
 

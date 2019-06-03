@@ -4,14 +4,14 @@
 #include "TaskDay.h"
 #include "TaskStd.h"
 
-class ToDoList 
+class ToDoList
 {
-    task** List;
-    unsigned count_tasks;
+	task** List;
+	unsigned count_tasks;
 public:
-    short read_tasks();
-    void print_tasks(date&);
-    void print_all_tasks();
+	short read_tasks(std::string);
+	void print_tasks(date&);
+	void print_all_tasks();
 };
 
 #endif
