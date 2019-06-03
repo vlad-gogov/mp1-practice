@@ -26,12 +26,12 @@ void pmenu()
     printf("4. Посчитать стоимость\n");
 }
 
-int searchcod(int cod)
+int searchcod(char *barcode)
 {
     int idx = -1, i;
-    for (i = 0; i < MAX; i++) 
+	for (i = 0; i < MAX; i++)
 	{
-		if (cod == atoi(barcodes[i]))
+		if (strcmp(barcode, barcodes[i]))
 		{
 			idx = i;
 			break;
@@ -42,12 +42,12 @@ int searchcod(int cod)
 
 void scancod()
 {
-    int i, j, tmp_code;
+    int i, j;
     float skid = 0.0f, k = 0.0f;
     printf("Введите штрих-код: ");
-    scanf("%s", &barcode);
-	tmp_code = atoi(barcode);
-    i = searchcod(tmp_code);
+    scanf("%s", barcode);
+	barcode[4] = '/0';
+    i = searchcod(barcode);
     scancheck = i;
     if (i == -1)
     {
