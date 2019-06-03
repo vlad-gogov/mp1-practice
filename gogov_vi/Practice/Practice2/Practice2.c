@@ -25,7 +25,7 @@ void main()
     {
         numb[0] = rand() % 10;
     }
-     while(i < n)
+    while(i < n)
     {
         numb[i] = rand() % 10;
         j = 0;
