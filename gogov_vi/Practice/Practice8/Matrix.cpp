@@ -136,13 +136,6 @@ const double* Matrix::operator[](int x) const
     return arr + x * cols;
 }
 
-double* Matrix::operator[](int x)
-{
-    if (x > rows - 1)
-        throw NoElements();
-    return arr + x * cols;
-}
-
 void Matrix::GenerationArr() const
 {
     double lb = 1.0, rb = 10.0;

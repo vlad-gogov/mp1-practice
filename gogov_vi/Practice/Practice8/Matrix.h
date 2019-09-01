@@ -23,7 +23,6 @@ public:
     Matrix operator*(double);
     const Matrix& operator=(const Matrix&);
     const double* operator[](int) const;
-    double* operator[](int);
 	friend std::ostream& operator << (std::ostream& s, const Matrix& x);
     void GenerationArr() const;
 };
